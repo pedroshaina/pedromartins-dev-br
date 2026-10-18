@@ -1,13 +1,42 @@
 ---
 import { site } from '../config/site';
+import { localizedPath, type Locale } from '../i18n/locales';
+import { t } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const s = t(locale);
+const path = Astro.url.pathname;
+const switchItems = [
+  { locale: 'en', label: 'EN', lang: 'en' },
+  { locale: 'pt-br', label: 'PT', lang: 'pt-BR' },
+] as const;
 ---
 
 <header class="top">
-  <a class="brand" href="/">{site.initials}</a>
+  <a class="brand" href={localizedPath('/', locale)}>{site.initials}</a>
   <nav aria-label="Site">
-    <a href="/#projects">Projects</a>
-    <a href="/blog/">Blog</a>
-    <span class="lang">EN | PT</span>
+    <a href={`${localizedPath('/', locale)}#projects`}>{s.nav.projects}</a>
+    <a href={localizedPath('/blog/', locale)}>{s.nav.blog}</a>
+    <span class="lang" aria-label={s.nav.language}>
+      {
+        switchItems.map((item, i) => (
+          <>
+            {i > 0 && <span aria-hidden="true"> | </span>}
+            {item.locale === locale ? (
+              <span class="current" aria-current="true">{item.label}</span>
+            ) : (
+              <a href={localizedPath(path, item.locale)} hreflang={item.lang} lang={item.lang}>
+                {item.label}
+              </a>
+            )}
+          </>
+        ))
+      }
+    </span>
   </nav>
 </header>
 
@@ -37,6 +66,10 @@ import { site } from '../config/site';
     display: flex;
     gap: 1.6em;
     align-items: center;
+  }
+
+  .current {
+    color: var(--color-dim);
   }
 
   @media (max-width: 480px) {
