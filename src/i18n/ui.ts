@@ -30,6 +30,9 @@ export type UiStrings = {
     previous: string;
     next: string;
   };
+  rss: {
+    title: string;
+  };
   notFound: {
     title: string;
     body: string;
@@ -65,6 +68,7 @@ export const ui: Record<Locale, UiStrings> = {
       previous: 'Previous',
       next: 'Next',
     },
+    rss: { title: 'Pedro Martins · Blog' },
     notFound: {
       title: 'Page not found',
       body: 'There is nothing at this address.',
@@ -98,6 +102,7 @@ export const ui: Record<Locale, UiStrings> = {
       previous: 'Anterior',
       next: 'Próximo',
     },
+    rss: { title: 'Pedro Martins · Blog (português)' },
     notFound: {
       title: 'Página não encontrada',
       body: 'Não há nada neste endereço.',

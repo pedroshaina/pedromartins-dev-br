@@ -22,7 +22,7 @@ const switchItems = [
   <nav aria-label="Site">
     <a href={`${localizedPath('/', locale)}#projects`}>{s.nav.projects}</a>
     <a href={localizedPath('/blog/', locale)}>{s.nav.blog}</a>
-    <span class="lang" aria-label={s.nav.language}>
+    <span class="lang" role="group" aria-label={s.nav.language}>
       {
         switchItems.map((item, i) => (
           <>
