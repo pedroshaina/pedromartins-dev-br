@@ -1,0 +1,119 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@500;600&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+
+<h2>Projects separated, with GitHub and website links by the title</h2>
+<p class="subtitle">Site navigation (Projects, Blog, language) moved to the top bar on every page; only your own links (GitHub, LinkedIn, Email) stay under the intro. Text is placeholder.</p>
+
+<style>
+  .ca { --bg:#060b1d; --mag:#ff2a6d; --cy:#05d9e8; --tx:#9aa1ba; --hi:#e8eaf3; --dim:#565d7a;
+        background:var(--bg); color:var(--tx); font-family:"IBM Plex Sans", system-ui, sans-serif; font-size:13.5px; line-height:1.7; }
+  .mockup:has(.ca), .mockup-body:has(.ca) { background:#060b1d; }
+  .ca .scr { min-height:400px; padding:22px 30px; box-sizing:border-box; display:flex; flex-direction:column; border-bottom:1px dashed rgba(255,255,255,.06); position:relative; }
+  .ca .scr .tagn { position:absolute; right:8px; top:6px; font-family:"IBM Plex Mono", monospace; font-size:9px; color:#2b3354; }
+  .ca .top { display:flex; justify-content:space-between; font-family:Oxanium, sans-serif; font-size:10px; letter-spacing:.2em; color:var(--dim); }
+  .ca .top b { color:var(--hi); font-weight:500; }
+  .ca .av { border-radius:50%; border:1px solid var(--mag); box-shadow:0 0 18px rgba(255,42,109,.45); background:#0c142e; display:flex; align-items:center; justify-content:center; font-family:Oxanium, sans-serif; color:var(--mag); }
+  .ca h4 { font-family:Oxanium, sans-serif; color:#fff; font-weight:500; margin:0; }
+  .ca .mid { flex:1; display:flex; flex-direction:column; justify-content:center; }
+  .ca a { color:var(--hi); text-decoration:none; border-bottom:1px solid rgba(255,42,109,.6); }
+  .ca .hint { font-family:"IBM Plex Mono", monospace; font-size:9px; letter-spacing:.2em; color:var(--dim); text-align:center; }
+  .ca .sec { font-family:"IBM Plex Mono", monospace; font-size:10px; letter-spacing:.24em; color:var(--mag); margin-bottom:26px; }
+  .ca .proj { padding:22px 0; max-width:460px; border-top:1px solid rgba(255,255,255,.08); }
+  .ca .proj:last-child { border-bottom:1px solid rgba(255,255,255,.08); }
+  .ca .proj .tl { display:flex; align-items:baseline; gap:16px; margin-bottom:6px; }
+  .ca .proj .tl h5 { margin:0; }
+  .ca .proj .ext { font-size:11.5px; color:var(--dim); letter-spacing:.04em; }
+  .ca .proj .ext span { margin-right:12px; border-bottom:1px solid rgba(255,255,255,.15); }
+  .ca .proj h5 { font-family:Oxanium, sans-serif; color:#fff; font-size:22px; font-weight:500; margin:0 0 6px; }
+  .ca .proj p { margin:0 0 10px; }
+  .ca .proj .lk { font-size:12px; color:var(--cy); letter-spacing:.04em; }
+  .ca .post { display:flex; justify-content:space-between; gap:20px; padding:12px 0; border-bottom:1px solid rgba(255,255,255,.05); max-width:520px; }
+  .ca .post b { color:var(--hi); font-weight:400; } .ca .post span { color:var(--dim); font-size:12px; white-space:nowrap; }
+  .ca .foot { padding:20px 30px; display:flex; justify-content:space-between; font-size:11px; color:var(--dim); }
+
+  /* article */
+  .ca.art { padding:22px 30px 40px; }
+  .ca.art .wrap { max-width:480px; margin:40px auto 0; }
+  .ca.art .meta { font-family:"IBM Plex Mono", monospace; font-size:10px; letter-spacing:.14em; color:var(--dim); }
+  .ca.art h1 { font-family:Oxanium, sans-serif; color:#fff; font-size:28px; font-weight:500; line-height:1.2; margin:10px 0 6px; }
+  .ca.art .from { font-size:12px; color:var(--dim); margin-bottom:30px; } .ca.art .from a { color:var(--tx); }
+  .ca.art p { color:#c3c8d9; margin:0 0 16px; }
+  .ca.art h2 { font-family:Oxanium, sans-serif; color:#fff; font-size:18px; font-weight:500; margin:30px 0 10px; }
+  .ca.art code { font-family:"IBM Plex Mono", monospace; font-size:12px; color:var(--cy); }
+  .ca.art pre { font-family:"IBM Plex Mono", monospace; font-variant-ligatures:none; font-size:12px; line-height:1.6; background:#0a1128; padding:14px 16px; color:var(--tx); margin:0 0 16px; white-space:pre; overflow:hidden; border-radius:4px; }
+  .ca.art pre .k { color:var(--mag); } .ca.art pre .s { color:var(--cy); } .ca.art pre .c { color:#4a5172; }
+  .ca.art .next { margin-top:34px; padding-top:16px; border-top:1px solid rgba(255,255,255,.06); display:flex; justify-content:space-between; font-size:12px; color:var(--dim); }
+  .ca.art .next b { color:var(--hi); font-weight:400; display:block; }
+</style>
+
+<div class="split">
+
+  <div class="mockup">
+    <div class="mockup-header">Home — scrolling down</div>
+    <div class="mockup-body" style="padding:0"><div class="ca">
+
+      <div class="scr"><span class="tagn">SCREEN 1</span>
+        <div class="top"><b>PM</b><span><span style="color:var(--hi)">PROJECTS</span> &nbsp;&nbsp; <span style="color:var(--hi)">BLOG</span> &nbsp;&nbsp; EN | PT</span></div>
+        <div class="mid" style="align-items:center;text-align:center">
+          <div class="av" style="width:92px;height:92px;font-size:26px">PM</div>
+          <h4 style="font-size:28px;margin-top:16px">Pedro Martins</h4>
+          <p style="max-width:340px;margin:8px 0 14px">Senior software engineer, 12+ years across industries. I build backend systems that keep working when things go wrong.</p>
+          <div style="font-size:12px;letter-spacing:.06em"><a>GitHub</a> &nbsp;&nbsp; <a>LinkedIn</a> &nbsp;&nbsp; <a>Email</a></div>
+        </div>
+        <div class="hint">SCROLL ↓</div>
+      </div>
+
+      <div class="scr"><span class="tagn">SCREEN 2</span>
+        <div class="mid">
+          <div class="sec">PROJECTS</div>
+          <div class="proj">
+            <div class="tl"><h5>k8s homelab</h5><div class="ext"><span>GitHub ↗</span></div></div>
+            <p>A production-style Kubernetes platform on one machine, run entirely through GitOps. This site is deployed on it.</p>
+            <div class="lk">Read about it on the blog →</div>
+          </div>
+          <div class="proj">
+            <div class="tl"><h5>yabe</h5><div class="ext"><span>GitHub ↗</span><span>Website ↗</span></div></div>
+            <p>A Bitcoin block explorer whose indexer stays correct when the chain reorganises. Live on signet.</p>
+            <div class="lk">Read about it on the blog →</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scr" style="min-height:300px"><span class="tagn">SCREEN 3</span>
+        <div class="mid">
+          <div class="sec">BLOG</div>
+          <div class="post"><b>Why this site runs on my homelab</b><span>Oct 2026</span></div>
+          <div class="post"><b>Surviving chain reorgs in yabe</b><span>Sep 2026</span></div>
+          <div class="post"><b>Splitting platform and team repos with Argo CD</b><span>Aug 2026</span></div>
+          <div style="margin-top:16px;font-size:12px"><a>All posts</a></div>
+        </div>
+      </div>
+
+      <div class="foot"><span>© 2026 Pedro Martins</span><span>GitHub · LinkedIn · Email</span></div>
+    </div></div>
+  </div>
+
+  <div class="mockup">
+    <div class="mockup-header">Blog post</div>
+    <div class="mockup-body" style="padding:0"><div class="ca art">
+      <div class="top"><b>PM</b><span><span style="color:var(--hi)">PROJECTS</span> &nbsp;&nbsp; <span style="color:var(--hi)">BLOG</span> &nbsp;&nbsp; EN | PT</span></div>
+      <div class="wrap">
+        <div class="meta">SEP 21, 2026 · 8 MIN</div>
+        <h1>Surviving chain reorgs in yabe</h1>
+        <div class="from">Part 2 of 2 on <a>yabe</a></div>
+        <p>A block explorer has one job: show the chain as the node sees it. The trouble is that the node changes its mind. When a competing branch overtakes the tip, blocks the indexer already stored stop being part of the main chain.</p>
+        <h2>Finding where the chains diverge</h2>
+        <p>The indexer walks back from its own tip, asking the node for the hash at each height, until the two agree. Everything above that point goes in a single <code>DELETE</code>, in one transaction.</p>
+<pre><span class="c">// walk back until our hash matches the node's</span>
+<span class="k">while</span> (stored.hash !== <span class="k">await</span> node.<span class="s">getBlockHash</span>(h)) {
+  h -= 1;
+}</pre>
+        <p>Because each block is written in its own transaction, a crash at any point leaves the database consistent, and the indexer resumes where it stopped.</p>
+        <div class="next"><div>← Previous<b>Indexing Bitcoin into Postgres</b></div><div style="text-align:right">All posts<b>&nbsp;</b></div></div>
+      </div>
+    </div></div>
+  </div>
+
+</div>
+
+<p class="subtitle" style="margin-top:16px">Tell me in the terminal what to change.</p>

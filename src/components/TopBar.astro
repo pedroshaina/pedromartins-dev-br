@@ -1,0 +1,47 @@
+---
+import { site } from '../config/site';
+---
+
+<header class="top">
+  <a class="brand" href="/">{site.initials}</a>
+  <nav aria-label="Site">
+    <a href="/#projects">Projects</a>
+    <a href="/blog/">Blog</a>
+    <span class="lang">EN | PT</span>
+  </nav>
+</header>
+
+<style>
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 30px;
+    font-family: var(--font-heading);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-dim);
+  }
+
+  a {
+    color: var(--color-emphasis);
+    text-decoration: none;
+  }
+
+  .brand {
+    font-weight: 500;
+  }
+
+  nav {
+    display: flex;
+    gap: 1.6em;
+    align-items: center;
+  }
+
+  @media (max-width: 480px) {
+    .top {
+      padding: 18px 16px;
+    }
+  }
+</style>

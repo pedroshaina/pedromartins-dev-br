@@ -1,12 +1,18 @@
-# Placeholder build: replace with your app's. Keep: linux/amd64, a non-root user, no shell needed.
-FROM golang:1.27-alpine@sha256:f92b6ef800e499660581efdabdf25d9d817a9d124eaf900924f0504e7e27e12d AS build
+# Build: Astro renders the site to plain files in dist/.
+FROM node:24.22.0-alpine@sha256:44fce696f38ba8c987c4db89954051000bbd05ffd8d8659ba15ed4a8602e937f AS build
 WORKDIR /src
-COPY go.mod ./
-COPY *.go ./
-RUN CGO_ENABLED=0 go build -trimpath -ldflags="-s -w" -o /app .
+RUN corepack enable
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
+COPY . .
+RUN pnpm build
 
-FROM gcr.io/distroless/static-debian13:nonroot@sha256:e2e927ec666bae08560abb3c55d0659eceabb657f56b6782ab500a9fc7f555e3
-COPY --from=build /app /app
-USER 65532:65532
+# Runtime: nginx only, as UID 101, on a read-only root filesystem with /tmp as the one writable path.
+FROM nginxinc/nginx-unprivileged:1.30.6-alpine@sha256:782bb89768cc87b7f95c18b95baa1af250e5d451f26794f59363540161147c01
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
+COPY --from=build /src/dist /usr/share/nginx/html
+USER 101
 EXPOSE 8080
-ENTRYPOINT ["/app"]
+# The image's entrypoint scripts rewrite files under /etc/nginx, which fails on a read-only filesystem.
+ENTRYPOINT []
+CMD ["nginx", "-g", "daemon off;"]
