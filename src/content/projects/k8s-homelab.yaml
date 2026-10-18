@@ -1,0 +1,13 @@
+# TODO(Pedro): rewrite the summaries.
+order: 1
+repo: https://github.com/pedroshaina/k8s-homelab
+en:
+  title: k8s homelab
+  summary: >-
+    A production-style Kubernetes platform on one machine at home, where everything is code and
+    every change is a pull request. This site is deployed on it.
+pt-br:
+  title: k8s homelab
+  summary: >-
+    Uma plataforma Kubernetes no estilo de produção, em uma única máquina em casa: tudo é código e
+    toda mudança é um pull request. Este site roda nela.
