@@ -1,0 +1,103 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500&family=Inter:wght@400&family=Share+Tech+Mono&family=JetBrains+Mono&family=Oxanium:wght@500;600&family=IBM+Plex+Sans:wght@400&family=IBM+Plex+Mono&family=Tomorrow:wght@500&family=Atkinson+Hyperlegible:wght@400&family=Martian+Mono:wght@400&family=Michroma&family=Hanken+Grotesk:wght@400&family=Fragment+Mono&family=Saira+Semi+Condensed:wght@500&family=Red+Hat+Text:wght@400&family=Red+Hat+Mono&display=swap" rel="stylesheet">
+
+<h2>Font pairings, side by side</h2>
+<p class="subtitle">Same snippet in each: top bar, name, intro, a section label, a project, and a line of code. Heading / body / labels+code. The first one is the current mockup, for comparison.</p>
+
+<style>
+  .fp { --bg:#060b1d; --mag:#ff2a6d; --cy:#05d9e8; --tx:#9aa1ba; --hi:#e8eaf3; --dim:#565d7a;
+        background:var(--bg); color:var(--tx); padding:18px 22px 20px; font-size:14px; line-height:1.65; width:100%; box-sizing:border-box; }
+  .fp .top { display:flex; justify-content:space-between; font-size:10px; letter-spacing:.2em; color:var(--dim); margin-bottom:22px; }
+  .fp .top b { color:var(--hi); font-weight:500; }
+  .fp .name { color:#fff; font-size:30px; line-height:1.1; margin:0 0 8px; }
+  .fp .intro { margin:0 0 18px; max-width:420px; }
+  .fp .lbl { font-size:10px; letter-spacing:.24em; color:var(--mag); margin-bottom:8px; }
+  .fp .pt { color:#fff; font-size:20px; margin:0 0 4px; }
+  .fp .pd { margin:0 0 14px; max-width:420px; }
+  .fp .code { font-size:12px; background:#0a1128; padding:9px 12px; border-radius:4px; font-variant-ligatures:none; }
+  .fp .code .k { color:var(--mag); } .fp .code .s { color:var(--cy); }
+  .fp .meta { margin-top:12px; font-size:10.5px; color:var(--dim); letter-spacing:.06em; }
+  .fp .meta b { color:var(--hi); font-weight:400; }
+
+  .f0 .h { font-family:"Chakra Petch"; font-weight:500; } .f0 .b { font-family:Inter; } .f0 .m { font-family:"Share Tech Mono"; } .f0 .c { font-family:"JetBrains Mono"; }
+  .f1 .h { font-family:Oxanium; font-weight:600; } .f1 .b { font-family:"IBM Plex Sans"; } .f1 .m, .f1 .c { font-family:"IBM Plex Mono"; }
+  .f2 .h { font-family:Tomorrow; font-weight:500; } .f2 .b { font-family:"Atkinson Hyperlegible"; } .f2 .m, .f2 .c { font-family:"Martian Mono"; }
+  .f3 .h { font-family:Michroma; font-weight:400; letter-spacing:.02em; } .f3 .name.h { font-size:25px; } .f3 .pt.h { font-size:17px; } .f3 .b { font-family:"Hanken Grotesk"; } .f3 .m, .f3 .c { font-family:"Fragment Mono"; }
+  .f4 .h { font-family:"Saira Semi Condensed"; font-weight:500; } .f4 .b { font-family:"Red Hat Text"; } .f4 .m, .f4 .c { font-family:"Red Hat Mono"; }
+</style>
+
+<div class="cards" style="grid-template-columns:repeat(auto-fit, minmax(440px, 1fr));">
+
+  <div class="card" data-choice="current" onclick="toggleSelect(this)">
+    <div class="card-image"><div class="fp f0">
+      <div class="top h"><b>PM</b><span>PROJECTS &nbsp; BLOG &nbsp; EN | PT</span></div>
+      <div class="name h">Pedro Martins</div>
+      <p class="intro b">Senior software engineer, 12+ years across industries. I build backend systems that keep working when things go wrong.</p>
+      <div class="lbl m">PROJECTS</div>
+      <div class="pt h">k8s homelab</div>
+      <p class="pd b">A production-style Kubernetes platform on one machine, run entirely through GitOps.</p>
+      <div class="code c"><span class="k">while</span> (stored.hash !== <span class="k">await</span> node.<span class="s">getBlockHash</span>(h)) h -= 1;</div>
+      <div class="meta m">SEP 21, 2026 · 8 MIN · <b>Surviving chain reorgs in yabe</b></div>
+    </div></div>
+    <div class="card-body"><h3>0. Current: Chakra Petch / Inter / Share Tech Mono + JetBrains Mono</h3><p>Inter and JetBrains Mono are the defaults of Tailwind-, shadcn- and Vercel-style sites, so yes, very common in AI-made pages. Share Tech Mono is a sci-fi template cliché.</p></div>
+  </div>
+
+  <div class="card" data-choice="oxanium-plex" onclick="toggleSelect(this)">
+    <div class="card-image"><div class="fp f1">
+      <div class="top h"><b>PM</b><span>PROJECTS &nbsp; BLOG &nbsp; EN | PT</span></div>
+      <div class="name h">Pedro Martins</div>
+      <p class="intro b">Senior software engineer, 12+ years across industries. I build backend systems that keep working when things go wrong.</p>
+      <div class="lbl m">PROJECTS</div>
+      <div class="pt h">k8s homelab</div>
+      <p class="pd b">A production-style Kubernetes platform on one machine, run entirely through GitOps.</p>
+      <div class="code c"><span class="k">while</span> (stored.hash !== <span class="k">await</span> node.<span class="s">getBlockHash</span>(h)) h -= 1;</div>
+      <div class="meta m">SEP 21, 2026 · 8 MIN · <b>Surviving chain reorgs in yabe</b></div>
+    </div></div>
+    <div class="card-body"><h3>1. Oxanium / IBM Plex Sans / IBM Plex Mono</h3><p>Oxanium has cut-corner letters, like a HUD readout, but stays readable. IBM Plex is an engineering-flavoured family; sans and mono match each other. Distinctive without shouting.</p></div>
+  </div>
+
+  <div class="card" data-choice="tomorrow-atkinson" onclick="toggleSelect(this)">
+    <div class="card-image"><div class="fp f2">
+      <div class="top h"><b>PM</b><span>PROJECTS &nbsp; BLOG &nbsp; EN | PT</span></div>
+      <div class="name h">Pedro Martins</div>
+      <p class="intro b">Senior software engineer, 12+ years across industries. I build backend systems that keep working when things go wrong.</p>
+      <div class="lbl m">PROJECTS</div>
+      <div class="pt h">k8s homelab</div>
+      <p class="pd b">A production-style Kubernetes platform on one machine, run entirely through GitOps.</p>
+      <div class="code c"><span class="k">while</span> (stored.hash !== <span class="k">await</span> node.<span class="s">getBlockHash</span>(h)) h -= 1;</div>
+      <div class="meta m">SEP 21, 2026 · 8 MIN · <b>Surviving chain reorgs in yabe</b></div>
+    </div></div>
+    <div class="card-body"><h3>2. Tomorrow / Atkinson Hyperlegible / Martian Mono</h3><p>Tomorrow is a rounded-square techno face, softer than Chakra Petch. Atkinson was designed for legibility (Braille Institute) and has a bit of character. Martian Mono is wide and squarish, very "terminal of the future".</p></div>
+  </div>
+
+  <div class="card" data-choice="michroma-hanken" onclick="toggleSelect(this)">
+    <div class="card-image"><div class="fp f3">
+      <div class="top h"><b>PM</b><span>PROJECTS &nbsp; BLOG &nbsp; EN | PT</span></div>
+      <div class="name h">Pedro Martins</div>
+      <p class="intro b">Senior software engineer, 12+ years across industries. I build backend systems that keep working when things go wrong.</p>
+      <div class="lbl m">PROJECTS</div>
+      <div class="pt h">k8s homelab</div>
+      <p class="pd b">A production-style Kubernetes platform on one machine, run entirely through GitOps.</p>
+      <div class="code c"><span class="k">while</span> (stored.hash !== <span class="k">await</span> node.<span class="s">getBlockHash</span>(h)) h -= 1;</div>
+      <div class="meta m">SEP 21, 2026 · 8 MIN · <b>Surviving chain reorgs in yabe</b></div>
+    </div></div>
+    <div class="card-body"><h3>3. Michroma / Hanken Grotesk / Fragment Mono</h3><p>Michroma is wide and geometric, like film credits or a car dashboard (think Blade Runner title cards). Used only for the name and titles. Hanken Grotesk and Fragment Mono keep the rest quiet.</p></div>
+  </div>
+
+  <div class="card" data-choice="saira-redhat" onclick="toggleSelect(this)">
+    <div class="card-image"><div class="fp f4">
+      <div class="top h"><b>PM</b><span>PROJECTS &nbsp; BLOG &nbsp; EN | PT</span></div>
+      <div class="name h">Pedro Martins</div>
+      <p class="intro b">Senior software engineer, 12+ years across industries. I build backend systems that keep working when things go wrong.</p>
+      <div class="lbl m">PROJECTS</div>
+      <div class="pt h">k8s homelab</div>
+      <p class="pd b">A production-style Kubernetes platform on one machine, run entirely through GitOps.</p>
+      <div class="code c"><span class="k">while</span> (stored.hash !== <span class="k">await</span> node.<span class="s">getBlockHash</span>(h)) h -= 1;</div>
+      <div class="meta m">SEP 21, 2026 · 8 MIN · <b>Surviving chain reorgs in yabe</b></div>
+    </div></div>
+    <div class="card-body"><h3>4. Saira Semi Condensed / Red Hat Text / Red Hat Mono</h3><p>Saira is a narrow, sporty techno face, close to the condensed lettering in 2077's UI but calmer. Red Hat Text and Mono are a matched pair, clean and slightly warm. A nice nod to the infrastructure world.</p></div>
+  </div>
+
+</div>
+
+<p class="subtitle" style="margin-top:16px">Mixing is fine (e.g. heading from 3, body from 1). Click one, then tell me in the terminal.</p>
