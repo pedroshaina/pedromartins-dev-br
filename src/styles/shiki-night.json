@@ -9,7 +9,7 @@
     { "settings": { "foreground": "#9aa1ba" } },
     {
       "scope": ["comment", "punctuation.definition.comment"],
-      "settings": { "foreground": "#4a5172" }
+      "settings": { "foreground": "#727ba4" }
     },
     {
       "scope": [
