@@ -20,7 +20,7 @@ concurrency:
 
 env:
   # --- CONFIG: the app's folder in homelab-apps-gitops (apps/<APP>/) = its onboarded name ---
-  APP: CHANGEME
+  APP: portfolio
   REGISTRY: ghcr.io/pedroshaina
 
 jobs:
@@ -28,11 +28,20 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      # Replace with your app's tests.
-      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          go-version-file: go.mod
-      - run: go vet ./... && go test ./...
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm check
+      - run: pnpm build
+      # Internal links and fragments only: external sites going down must not break CI.
+      - uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
+        with:
+          args: >-
+            --offline --include-fragments --index-files index.html
+            --root-dir ${{ github.workspace }}/dist --no-progress 'dist/**/*.html'
 
   build:
     needs: test
@@ -45,7 +54,7 @@ jobs:
       matrix:
         # --- CONFIG: one entry per image, published as ghcr.io/pedroshaina/<name> ---
         image:
-          - {name: homelab-apps-ci-cd-template, context: ., file: Dockerfile, build-args: ""}
+          - {name: portfolio, context: ., file: Dockerfile, build-args: ""}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
