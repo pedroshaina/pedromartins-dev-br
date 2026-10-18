@@ -2,17 +2,24 @@
 import '../styles/global.css';
 import TopBar from '../components/TopBar.astro';
 import Footer from '../components/Footer.astro';
+import { languageTag, localizedPath, locales, type Locale } from '../i18n/locales';
 
 interface Props {
   title: string;
   description: string;
+  locale: Locale;
 }
 
-const { title, description } = Astro.props;
+const { title, description, locale } = Astro.props;
+const alternates = locales.map((l) => ({
+  hreflang: languageTag[l],
+  href: new URL(localizedPath(Astro.url.pathname, l), Astro.site).href,
+}));
+const xDefault = new URL(localizedPath(Astro.url.pathname, 'en'), Astro.site).href;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={languageTag[locale]}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,9 +27,11 @@ const { title, description } = Astro.props;
     <link rel="icon" href="/favicon.ico" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
+    <link rel="alternate" hreflang="x-default" href={xDefault} />
   </head>
   <body>
-    <TopBar />
+    <TopBar locale={locale} />
     <main>
       <slot />
     </main>

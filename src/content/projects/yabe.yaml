@@ -1,0 +1,14 @@
+# TODO(Pedro): rewrite the summaries.
+order: 2
+repo: https://github.com/pedroshaina/yabe
+website: https://yabe.pdrlabs.com.br
+en:
+  title: yabe
+  summary: >-
+    A Bitcoin block explorer whose indexer keeps Postgres correct across chain reorganisations.
+    Live on signet.
+pt-br:
+  title: yabe
+  summary: >-
+    Um explorador de blocos Bitcoin cujo indexador mantém o Postgres correto durante reorganizações
+    da cadeia. No ar na signet.
