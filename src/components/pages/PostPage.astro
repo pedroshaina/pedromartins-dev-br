@@ -46,7 +46,13 @@ if (series) {
 }
 ---
 
-<BaseLayout title={`${data.title} · ${site.name}`} description={data.description} locale={locale}>
+<BaseLayout
+  title={`${data.title} · ${site.name}`}
+  description={data.description}
+  locale={locale}
+  type="article"
+  publishedTime={data.pubDate}
+>
   <article class="col">
     <p class="meta">
       <time datetime={data.pubDate.toISOString()}>{formatDate(data.pubDate, locale)}</time>

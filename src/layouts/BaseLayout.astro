@@ -2,7 +2,9 @@
 import '../styles/global.css';
 import TopBar from '../components/TopBar.astro';
 import Footer from '../components/Footer.astro';
+import Seo from '../components/Seo.astro';
 import { languageTag, localizedPath, locales, type Locale } from '../i18n/locales';
+import { t } from '../i18n/ui';
 
 interface Props {
   title: string;
@@ -12,9 +14,20 @@ interface Props {
   switchPaths?: Record<Locale, string>;
   /** Pages that aren't real addresses (404s): no hreflang alternates, not indexed. */
   noindex?: boolean;
+  type?: 'website' | 'article';
+  publishedTime?: Date;
 }
 
-const { title, description, locale, switchPaths, noindex = false } = Astro.props;
+const {
+  title,
+  description,
+  locale,
+  switchPaths,
+  noindex = false,
+  type,
+  publishedTime,
+} = Astro.props;
+const s = t(locale);
 const alternates = locales.map((l) => ({
   hreflang: languageTag[l],
   href: new URL(localizedPath(Astro.url.pathname, l), Astro.site).href,
@@ -31,6 +44,19 @@ const xDefault = new URL(localizedPath(Astro.url.pathname, 'en'), Astro.site).hr
     <link rel="icon" href="/favicon.ico" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <Seo
+      title={title}
+      description={description}
+      locale={locale}
+      type={type}
+      publishedTime={publishedTime}
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={s.rss.title}
+      href={localizedPath('/rss.xml', locale)}
+    />
     {noindex && <meta name="robots" content="noindex" />}
     {!noindex && alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
     {!noindex && <link rel="alternate" hreflang="x-default" href={xDefault} />}
