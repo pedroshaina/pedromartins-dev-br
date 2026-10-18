@@ -1,0 +1,57 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import { site } from '../config/site';
+
+interface Props {
+  size: number;
+}
+
+const { size } = Astro.props;
+
+// Dropping src/assets/avatar.{png,jpg,jpeg,webp,svg} in replaces the initials; no code change.
+const found = Object.values(
+  import.meta.glob<{ default: ImageMetadata }>('/src/assets/avatar.{png,jpg,jpeg,webp,svg}', {
+    eager: true,
+  }),
+)[0];
+---
+
+<div class="avatar" style={`--size: ${size}px`}>
+  {
+    found ? (
+      <Image src={found.default} width={size * 2} height={size * 2} alt={site.name} loading="eager" />
+    ) : (
+      <span aria-hidden="true">{site.initials}</span>
+    )
+  }
+</div>
+
+<style>
+  .avatar {
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    border: 1px solid var(--color-magenta);
+    box-shadow: 0 0 18px rgba(255, 42, 109, 0.45);
+    background: #0c142e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  span {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: calc(var(--size) * 0.28);
+    color: var(--color-magenta);
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>

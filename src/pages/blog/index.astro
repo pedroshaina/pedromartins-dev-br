@@ -1,19 +1,5 @@
 ---
-// Placeholder until the blog index lands (plan Task 9).
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogIndexPage from '../../components/pages/BlogIndexPage.astro';
 ---
 
-<BaseLayout title="Blog · Pedro Martins" description="Posts by Pedro Martins." locale="en">
-  <section class="soon">
-    <h1>Blog</h1>
-    <p>Posts are on their way.</p>
-  </section>
-</BaseLayout>
-
-<style>
-  .soon {
-    max-width: 680px;
-    margin: 60px auto;
-    padding: 0 16px;
-  }
-</style>
+<BlogIndexPage locale="en" />

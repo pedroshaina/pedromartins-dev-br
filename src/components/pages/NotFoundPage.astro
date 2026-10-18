@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../config/site';
+import { localizedPath, type Locale } from '../../i18n/locales';
+import { t } from '../../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const s = t(locale);
+// A 404 answers any address, so its language switch goes to the other language's 404 page.
+const switchPaths = { en: '/404.html', 'pt-br': '/pt-br/404/' } as const;
+---
+
+<BaseLayout
+  title={`${s.notFound.title} · ${site.name}`}
+  description={s.notFound.body}
+  locale={locale}
+  switchPaths={switchPaths}
+  noindex
+>
+  <section class="col">
+    <p class="code">404</p>
+    <h1>{s.notFound.title}</h1>
+    <p>{s.notFound.body}</p>
+    <a href={localizedPath('/', locale)}>{s.notFound.home}</a>
+  </section>
+</BaseLayout>
+
+<style>
+  .col {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 18vh 16px 64px;
+    text-align: center;
+  }
+
+  .code {
+    margin: 0;
+    font-family: var(--font-mono);
+    letter-spacing: 0.24em;
+    color: var(--color-magenta);
+  }
+
+  h1 {
+    font-size: 28px;
+    margin: 8px 0;
+  }
+
+  a {
+    color: var(--color-emphasis);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 42, 109, 0.6);
+  }
+</style>

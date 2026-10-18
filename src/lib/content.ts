@@ -51,6 +51,17 @@ export function assertTranslations(
   if (problems.length) throw new Error(problems.join('; '));
 }
 
+// `![](src)` / `![ ](src)` and `<img>` without a non-empty alt attribute.
+const imageWithoutAlt = /!\[\s*\]\(([^)]*)\)|<img\b(?![^>]*\balt\s*=\s*["'][^"']*\S)[^>]*>/g;
+
+/** Throws if a post's Markdown has an image without alt text (spec §8: alt text required). */
+export function assertImageAlts(entries: CollectionEntry<'posts'>[]): void {
+  const missing = entries.flatMap((entry) =>
+    [...(entry.body ?? '').matchAll(imageWithoutAlt)].map((m) => `${entry.id}: ${m[1] ?? m[0]}`),
+  );
+  if (missing.length) throw new Error(`Images without alt text: ${missing.join(', ')}`);
+}
+
 let checked: Promise<void> | undefined;
 
 function checkOnce(): Promise<void> {
@@ -60,6 +71,7 @@ function checkOnce(): Promise<void> {
       posts,
       projects.map((p) => p.id),
     );
+    assertImageAlts(posts);
   })();
   return checked;
 }

@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostList from '../PostList.astro';
+import { site } from '../../config/site';
+import type { Locale } from '../../i18n/locales';
+import { t } from '../../i18n/ui';
+import { getPosts, type Project } from '../../lib/content';
+
+interface Props {
+  locale: Locale;
+  /** Set for the per-project list: that project's posts, oldest first. */
+  project?: Project;
+}
+
+const { locale, project } = Astro.props;
+const s = t(locale);
+const all = await getPosts(locale);
+const posts = project ? all.filter((p) => p.entry.data.project === project.slug) : all;
+const heading = project ? project.title : s.nav.blog;
+const description = project ? s.blog.projectDescription(project.title) : s.blog.description;
+---
+
+<BaseLayout title={`${heading} · ${site.name}`} description={description} locale={locale}>
+  <section class="col">
+    <h1>{heading}</h1>
+    <PostList posts={posts} locale={locale} order={project ? 'oldest' : 'newest'} />
+  </section>
+</BaseLayout>
+
+<style>
+  .col {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 48px 16px 64px;
+  }
+
+  h1 {
+    font-size: 28px;
+    line-height: 1.2;
+    margin: 0 0 24px;
+  }
+</style>

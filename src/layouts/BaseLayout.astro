@@ -8,9 +8,13 @@ interface Props {
   title: string;
   description: string;
   locale: Locale;
+  /** Where the language switch goes, when it isn't this page's path in the other language (404s). */
+  switchPaths?: Record<Locale, string>;
+  /** Pages that aren't real addresses (404s): no hreflang alternates, not indexed. */
+  noindex?: boolean;
 }
 
-const { title, description, locale } = Astro.props;
+const { title, description, locale, switchPaths, noindex = false } = Astro.props;
 const alternates = locales.map((l) => ({
   hreflang: languageTag[l],
   href: new URL(localizedPath(Astro.url.pathname, l), Astro.site).href,
@@ -27,11 +31,12 @@ const xDefault = new URL(localizedPath(Astro.url.pathname, 'en'), Astro.site).hr
     <link rel="icon" href="/favicon.ico" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    {alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
-    <link rel="alternate" hreflang="x-default" href={xDefault} />
+    {noindex && <meta name="robots" content="noindex" />}
+    {!noindex && alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
+    {!noindex && <link rel="alternate" hreflang="x-default" href={xDefault} />}
   </head>
   <body>
-    <TopBar locale={locale} />
+    <TopBar locale={locale} switchPaths={switchPaths} />
     <main>
       <slot />
     </main>

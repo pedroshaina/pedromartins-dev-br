@@ -1,0 +1,161 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/prose.css';
+import { site } from '../../config/site';
+import { formatDate, localizedPath, type Locale } from '../../i18n/locales';
+import { t } from '../../i18n/ui';
+import {
+  getPosts,
+  getProjects,
+  getSeries,
+  postHref,
+  projectBlogHref,
+  readingTime,
+  type Post,
+} from '../../lib/content';
+
+interface Props {
+  locale: Locale;
+  post: Post;
+}
+
+const { locale, post } = Astro.props;
+const s = t(locale);
+const { data } = post.entry;
+const { Content } = await render(post.entry);
+const [posts, projects] = await Promise.all([getPosts(locale), getProjects(locale)]);
+
+const series = getSeries(post, posts);
+const project = projects.find((p) => p.slug === data.project);
+// A one-post series links back to the project on the home page instead of to itself.
+const seriesHref =
+  project && series && series.total > 1
+    ? projectBlogHref(project, posts, locale)
+    : `${localizedPath('/', locale)}#projects`;
+
+// Within the series when there is one; otherwise chronological (posts are newest first).
+let prev: Post | undefined;
+let next: Post | undefined;
+if (series) {
+  ({ prev, next } = series);
+} else {
+  const i = posts.findIndex((p) => p.slug === post.slug);
+  prev = posts[i + 1];
+  next = i > 0 ? posts[i - 1] : undefined;
+}
+---
+
+<BaseLayout title={`${data.title} · ${site.name}`} description={data.description} locale={locale}>
+  <article class="col">
+    <p class="meta">
+      <time datetime={data.pubDate.toISOString()}>{formatDate(data.pubDate, locale)}</time>
+      {' · '}
+      {readingTime(post.entry.body ?? '')}
+      {' '}
+      {s.post.minRead}
+    </p>
+    <h1>{data.title}</h1>
+    {
+      series && project && (
+        <p class="from">
+          <a href={seriesHref}>{s.post.partOf(series.index, series.total, project.title)}</a>
+        </p>
+      )
+    }
+    <div class="prose">
+      <Content />
+    </div>
+    <nav class="next" aria-label={s.nav.blog}>
+      <div>
+        {
+          prev && (
+            <a href={postHref(prev)}>
+              <span>← {s.post.previous}</span>
+              <b>{prev.entry.data.title}</b>
+            </a>
+          )
+        }
+      </div>
+      <div class="right">
+        {
+          next && (
+            <a href={postHref(next)}>
+              <span>{s.post.next} →</span>
+              <b>{next.entry.data.title}</b>
+            </a>
+          )
+        }
+        <a class="all" href={localizedPath('/blog/', locale)}>{s.home.allPosts}</a>
+      </div>
+    </nav>
+  </article>
+</BaseLayout>
+
+<style>
+  .col {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 48px 16px 64px;
+  }
+
+  .meta {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-dim);
+  }
+
+  h1 {
+    font-size: 32px;
+    line-height: 1.2;
+    margin: 10px 0 6px;
+  }
+
+  .from {
+    margin: 0 0 32px;
+    font-size: 14px;
+    color: var(--color-dim);
+  }
+
+  .from a {
+    color: var(--color-text);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 42, 109, 0.6);
+  }
+
+  .next {
+    margin-top: 40px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    font-size: 14px;
+  }
+
+  .next a {
+    display: block;
+    color: var(--color-dim);
+    text-decoration: none;
+  }
+
+  .next b {
+    display: block;
+    font-weight: 400;
+    color: var(--color-emphasis);
+  }
+
+  .right {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .next .all {
+    color: var(--color-emphasis);
+  }
+</style>
