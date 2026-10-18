@@ -7,6 +7,8 @@ export default defineConfig({
   output: 'static',
   trailingSlash: 'always',
   build: { format: 'directory' },
+  // Scoped styles add no specificity, so global hover/focus rules win over components' link colours.
+  scopedStyleStrategy: 'where',
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'pt-br'],

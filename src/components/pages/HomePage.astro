@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import IntroScreen from '../home/IntroScreen.astro';
+import ProjectsSection from '../home/ProjectsSection.astro';
+import BlogSection from '../home/BlogSection.astro';
 import { site } from '../../config/site';
 import type { Locale } from '../../i18n/locales';
 import { t } from '../../i18n/ui';
@@ -11,39 +14,11 @@ interface Props {
 
 const { locale } = Astro.props;
 const s = t(locale);
-// Placeholder sections until the real home page (plan Task 8); loading posts runs the translation check.
 const [posts, projects] = await Promise.all([getPosts(locale), getProjects(locale)]);
 ---
 
 <BaseLayout title={site.name} description={s.home.description} locale={locale}>
-  <section class="intro">
-    <h1>{site.name}</h1>
-    <p>{s.home.intro}</p>
-  </section>
-  <section id="projects" class="intro">
-    <p>{s.home.projectsLabel}: {projects.map((p) => p.title).join(' · ')}</p>
-    <p>{s.home.blogLabel}: {posts.length}</p>
-  </section>
+  <IntroScreen locale={locale} />
+  <ProjectsSection locale={locale} projects={projects} posts={posts} />
+  {posts.length > 0 && <BlogSection locale={locale} posts={posts} />}
 </BaseLayout>
-
-<style>
-  .intro {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 70vh;
-    text-align: center;
-    padding: 0 16px;
-  }
-
-  h1 {
-    font-size: 28px;
-    margin: 0 0 8px;
-  }
-
-  p {
-    max-width: 340px;
-    margin: 0 0 8px;
-  }
-</style>
