@@ -1,0 +1,70 @@
+---
+import { formatDate, type Locale } from '../i18n/locales';
+import { postHref, type Post } from '../lib/content';
+
+interface Props {
+  posts: Post[];
+  locale: Locale;
+  order: 'newest' | 'oldest';
+}
+
+const { posts, locale, order } = Astro.props;
+const sorted = [...posts].sort((a, b) => {
+  const d = a.entry.data.pubDate.getTime() - b.entry.data.pubDate.getTime();
+  return order === 'oldest' ? d : -d;
+});
+---
+
+<ul class="posts">
+  {
+    sorted.map((post) => (
+      <li class="post">
+        <div class="head">
+          <a href={postHref(post)}>{post.entry.data.title}</a>
+          <time datetime={post.entry.data.pubDate.toISOString()}>
+            {formatDate(post.entry.data.pubDate, locale)}
+          </time>
+        </div>
+        <p>{post.entry.data.description}</p>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .posts {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .post {
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    column-gap: 20px;
+  }
+
+  a {
+    color: var(--color-emphasis);
+    text-decoration: none;
+  }
+
+  time {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--color-dim);
+    white-space: nowrap;
+  }
+
+  p {
+    margin: 4px 0 0;
+    font-size: 15px;
+  }
+</style>

@@ -5,9 +5,10 @@ import { t } from '../i18n/ui';
 
 interface Props {
   locale: Locale;
+  switchPaths?: Record<Locale, string>;
 }
 
-const { locale } = Astro.props;
+const { locale, switchPaths } = Astro.props;
 const s = t(locale);
 const path = Astro.url.pathname;
 const switchItems = [
@@ -29,7 +30,7 @@ const switchItems = [
             {item.locale === locale ? (
               <span class="current" aria-current="true">{item.label}</span>
             ) : (
-              <a href={localizedPath(path, item.locale)} hreflang={item.lang} lang={item.lang}>
+              <a href={switchPaths?.[item.locale] ?? localizedPath(path, item.locale)} hreflang={item.lang} lang={item.lang}>
                 {item.label}
               </a>
             )}

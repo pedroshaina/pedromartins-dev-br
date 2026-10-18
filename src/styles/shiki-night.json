@@ -1,0 +1,40 @@
+{
+  "name": "night",
+  "type": "dark",
+  "colors": {
+    "editor.background": "#0a1128",
+    "editor.foreground": "#9aa1ba"
+  },
+  "tokenColors": [
+    { "settings": { "foreground": "#9aa1ba" } },
+    {
+      "scope": ["comment", "punctuation.definition.comment"],
+      "settings": { "foreground": "#4a5172" }
+    },
+    {
+      "scope": [
+        "keyword",
+        "storage",
+        "storage.type",
+        "storage.modifier",
+        "keyword.control",
+        "keyword.operator.new",
+        "keyword.operator.expression",
+        "variable.language",
+        "constant.language"
+      ],
+      "settings": { "foreground": "#ff2a6d" }
+    },
+    {
+      "scope": [
+        "string",
+        "string.quoted",
+        "string.template",
+        "entity.name.function",
+        "support.function",
+        "meta.function-call entity.name.function"
+      ],
+      "settings": { "foreground": "#05d9e8" }
+    }
+  ]
+}

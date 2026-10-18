@@ -20,6 +20,10 @@ export type UiStrings = {
     website: string;
     readOnBlog: string;
   };
+  blog: {
+    description: string;
+    projectDescription: (project: string) => string;
+  };
   post: {
     partOf: (n: number, m: number, project: string) => string;
     minRead: string;
@@ -29,6 +33,7 @@ export type UiStrings = {
   notFound: {
     title: string;
     body: string;
+    home: string;
   };
 };
 
@@ -50,6 +55,10 @@ export const ui: Record<Locale, UiStrings> = {
       website: 'Website ↗',
       readOnBlog: 'Read about it on the blog →',
     },
+    blog: {
+      description: 'Posts by Pedro Martins on the projects he builds.',
+      projectDescription: (project) => `Posts about ${project}, oldest first.`,
+    },
     post: {
       partOf: (n, m, project) => `Part ${n} of ${m} on ${project}`,
       minRead: 'min',
@@ -59,6 +68,7 @@ export const ui: Record<Locale, UiStrings> = {
     notFound: {
       title: 'Page not found',
       body: 'There is nothing at this address.',
+      home: 'Back to the home page',
     },
   },
   'pt-br': {
@@ -78,6 +88,10 @@ export const ui: Record<Locale, UiStrings> = {
       website: 'Site ↗',
       readOnBlog: 'Leia sobre no blog →',
     },
+    blog: {
+      description: 'Textos de Pedro Martins sobre os projetos que ele constrói.',
+      projectDescription: (project) => `Posts sobre ${project}, do mais antigo ao mais recente.`,
+    },
     post: {
       partOf: (n, m, project) => `Parte ${n} de ${m} sobre ${project}`,
       minRead: 'min',
@@ -87,6 +101,7 @@ export const ui: Record<Locale, UiStrings> = {
     notFound: {
       title: 'Página não encontrada',
       body: 'Não há nada neste endereço.',
+      home: 'Voltar para a página inicial',
     },
   },
 };
