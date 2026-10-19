@@ -24,6 +24,9 @@ const year = new Date().getFullYear();
     padding: 20px 30px;
     font-size: 13px;
     color: var(--color-dim);
+    /* last snap point on pages that snap: the bottom of the page */
+    scroll-snap-align: end;
+    scroll-snap-stop: always;
   }
 
   a {

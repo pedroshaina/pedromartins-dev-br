@@ -16,6 +16,8 @@ interface Props {
   noindex?: boolean;
   type?: 'website' | 'article';
   publishedTime?: Date;
+  /** Scroll snaps a whole screen at a time (home page). */
+  snap?: boolean;
 }
 
 const {
@@ -26,6 +28,7 @@ const {
   noindex = false,
   type,
   publishedTime,
+  snap = false,
 } = Astro.props;
 const s = t(locale);
 const alternates = locales.map((l) => ({
@@ -36,7 +39,7 @@ const xDefault = new URL(localizedPath(Astro.url.pathname, 'en'), Astro.site).hr
 ---
 
 <!doctype html>
-<html lang={languageTag[locale]}>
+<html lang={languageTag[locale]} class:list={[{ snap }]}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

@@ -51,15 +51,18 @@ const s = t(locale);
 
 <style>
   .screen {
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
     padding: 64px 16px;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
 
-  @media (min-width: 720px) and (min-height: 600px) {
-    .screen {
-      min-height: 100svh;
-      display: flex;
-      align-items: center;
-    }
+  /* The last screen shares the window with the footer, which is where it snaps. */
+  .screen:last-child {
+    min-height: calc(100svh - var(--footer-height));
+    scroll-snap-align: none;
   }
 
   .col {
