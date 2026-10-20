@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import IntroScreen from '../home/IntroScreen.astro';
+import StackSection from '../home/StackSection.astro';
 import ProjectsSection from '../home/ProjectsSection.astro';
 import BlogSection from '../home/BlogSection.astro';
 import { site } from '../../config/site';
@@ -19,6 +20,7 @@ const [posts, projects] = await Promise.all([getPosts(locale), getProjects(local
 
 <BaseLayout title={site.name} description={s.home.description} locale={locale} snap>
   <IntroScreen locale={locale} />
+  <StackSection locale={locale} />
   <ProjectsSection locale={locale} projects={projects} posts={posts} />
   {posts.length > 0 && <BlogSection locale={locale} posts={posts} />}
 </BaseLayout>

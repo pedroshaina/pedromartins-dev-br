@@ -2,14 +2,15 @@ import type { Locale } from './locales';
 
 export type UiStrings = {
   nav: {
-    projects: string;
     blog: string;
     /** aria-label of the language switch */
     language: string;
   };
   home: {
     description: string;
-    intro: string;
+    /** One string per paragraph. */
+    intro: string[];
+    stackLabel: string;
     projectsLabel: string;
     blogLabel: string;
     allPosts: string;
@@ -42,12 +43,14 @@ export type UiStrings = {
 
 export const ui: Record<Locale, UiStrings> = {
   en: {
-    nav: { projects: 'Projects', blog: 'Blog', language: 'Language' },
+    nav: { blog: 'Blog', language: 'Language' },
     home: {
       description: 'Pedro Martins, senior software engineer: projects and writing.',
       // TODO(Pedro): the real intro sentence.
-      intro:
+      intro: [
         'Senior software engineer, 12+ years across industries. I build backend systems that keep working when things go wrong.',
+      ],
+      stackLabel: 'Stack',
       projectsLabel: 'Projects',
       blogLabel: 'Blog',
       allPosts: 'All posts',
@@ -76,12 +79,14 @@ export const ui: Record<Locale, UiStrings> = {
     },
   },
   'pt-br': {
-    nav: { projects: 'Projetos', blog: 'Blog', language: 'Idioma' },
+    nav: { blog: 'Blog', language: 'Idioma' },
     home: {
       description: 'Pedro Martins, engenheiro de software sênior: projetos e textos.',
       // TODO(Pedro): a frase de apresentação de verdade.
-      intro:
+      intro: [
         'Engenheiro de software sênior com mais de 12 anos de experiência em diferentes indústrias. Meu foco é construir sistemas de backend e soluções que não param quando algo dá errado.',
+      ],
+      stackLabel: 'Tecnologias',
       projectsLabel: 'Projetos',
       blogLabel: 'Blog',
       allPosts: 'Todos os posts',
