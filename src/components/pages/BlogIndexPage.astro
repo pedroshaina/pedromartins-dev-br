@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostList from '../PostList.astro';
 import { site } from '../../config/site';
-import type { Locale } from '../../i18n/locales';
+import { localizedPath, type Locale } from '../../i18n/locales';
 import { t } from '../../i18n/ui';
 import { getPosts, type Project } from '../../lib/content';
 
@@ -21,22 +21,76 @@ const description = project ? s.blog.projectDescription(project.title) : s.blog.
 ---
 
 <BaseLayout title={`${heading} · ${site.name}`} description={description} locale={locale}>
-  <section class="col">
-    <h1>{heading}</h1>
-    <PostList posts={posts} locale={locale} order={project ? 'oldest' : 'newest'} />
+  <section class="page">
+    <div class="side">
+      <h1>{heading}</h1>
+      {
+        project && (
+          <>
+            <p class="lede">{description}</p>
+            <p class="lede">
+              <a href={localizedPath('/blog/', locale)}>{s.home.allPosts}</a>
+            </p>
+          </>
+        )
+      }
+    </div>
+    <PostList posts={posts} locale={locale} order={project ? 'oldest' : 'newest'} numbered={!!project} />
   </section>
 </BaseLayout>
 
 <style>
-  .col {
-    max-width: 680px;
+  .page {
+    display: grid;
+    row-gap: 32px;
+    max-width: 1040px;
     margin: 0 auto;
-    padding: 48px 16px 64px;
+    padding: 72px 16px 64px;
   }
 
+  @media (min-width: 720px) {
+    .page {
+      grid-template-columns: 220px minmax(0, 1fr);
+      column-gap: 56px;
+      align-items: start;
+      padding-left: 48px;
+      padding-right: 48px;
+    }
+  }
+
+  /* Same title device as the home screens, on the left edge only. */
   h1 {
-    font-size: 28px;
-    line-height: 1.2;
-    margin: 0 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 30px;
+    line-height: 1.1;
+    margin: -4px 0 0;
+  }
+
+  h1::before {
+    content: '';
+    width: 22px;
+    height: 2px;
+    flex-shrink: 0;
+    background: var(--color-magenta);
+    box-shadow: 0 0 8px rgba(255, 42, 109, 0.6);
+  }
+
+  .lede {
+    max-width: 32ch;
+    margin: 10px 0 0;
+    font-size: 15px;
+    color: var(--color-dim);
+  }
+
+  .lede + .lede {
+    margin-top: 14px;
+  }
+
+  .lede a {
+    color: var(--color-emphasis);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 42, 109, 0.6);
   }
 </style>

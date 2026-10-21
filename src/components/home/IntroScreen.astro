@@ -13,7 +13,7 @@ const s = t(Astro.props.locale);
 
 <section class="intro">
   <div class="mid">
-    <Avatar size={92} />
+    <Avatar size={132} />
     <h1>{site.name}</h1>
     <div class="text">
       {s.home.intro.map((paragraph) => <p>{paragraph}</p>)}
@@ -24,7 +24,7 @@ const s = t(Astro.props.locale);
       <li><a href={site.links.email}>Email</a></li>
     </ul>
   </div>
-  <p class="hint" aria-hidden="true">{s.home.scrollHint}</p>
+  <a class="hint" href="#stack">{s.home.scrollHint}<span aria-hidden="true">↓</span></a>
 </section>
 
 <style>
@@ -33,7 +33,7 @@ const s = t(Astro.props.locale);
     min-height: calc(100svh - 70px);
     display: flex;
     flex-direction: column;
-    padding: 0 16px 24px;
+    padding: 0 16px 16px;
   }
 
   .mid {
@@ -46,32 +46,28 @@ const s = t(Astro.props.locale);
   }
 
   h1 {
-    font-size: 28px;
-    line-height: 1.2;
-    margin: 18px 0 0;
+    font-weight: 600;
+    font-size: clamp(36px, 9vw, 64px);
+    line-height: 1.05;
+    margin: 26px 0 20px;
   }
 
   .text {
-    max-width: 520px;
-    margin: 10px 0 16px;
+    max-width: 60ch;
+    font-size: 18px;
   }
 
   .text p {
-    margin: 0 0 10px;
-  }
-
-  .text p:last-child {
-    margin-bottom: 0;
+    margin: 0 0 12px;
   }
 
   .links {
     display: flex;
-    gap: 22px;
+    gap: 26px;
     list-style: none;
-    margin: 0;
+    margin: 10px 0 0;
     padding: 0;
-    font-size: 14px;
-    letter-spacing: 0.06em;
+    font-size: 15px;
   }
 
   .links a {
@@ -80,14 +76,51 @@ const s = t(Astro.props.locale);
     border-bottom: 1px solid rgba(255, 42, 109, 0.6);
   }
 
+  /* The one thing that moves on its own: a small bounce, paused while pointed at or focused. */
   .hint {
-    max-width: none;
-    margin: 0;
-    text-align: center;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--color-dim);
+    align-self: center;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 10px 22px;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--color-emphasis);
+    text-decoration: none;
+    animation: nudge 1.8s ease-in-out infinite;
+  }
+
+  .hint span {
+    font-size: 16px;
+    line-height: 1;
+    color: var(--color-magenta);
+    text-shadow: 0 0 8px rgba(255, 42, 109, 0.6);
+    transition: color 0.2s, text-shadow 0.2s;
+  }
+
+  .hint:hover,
+  .hint:focus-visible {
+    animation-play-state: paused;
+  }
+
+  .hint:hover span,
+  .hint:focus-visible span {
+    color: var(--color-cyan);
+    text-shadow: 0 0 10px rgba(5, 217, 232, 0.6);
+  }
+
+  @keyframes nudge {
+    0%,
+    55%,
+    100% {
+      transform: translateY(0);
+    }
+    25% {
+      transform: translateY(7px);
+    }
+    40% {
+      transform: translateY(2px);
+    }
   }
 </style>

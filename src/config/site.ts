@@ -1,5 +1,5 @@
 export const site = {
-  name: 'Pedro Martins',
+  name: 'Pedro Shainã Martins',
   initials: 'PM',
   links: {
     github: 'https://github.com/pedroshaina',

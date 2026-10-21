@@ -11,6 +11,9 @@ interface Props {
 const { locale, switchPaths } = Astro.props;
 const s = t(locale);
 const path = Astro.url.pathname;
+const blogPath = localizedPath('/blog/', locale);
+// Inside the blog the link would point at where you already are.
+const inBlog = path.startsWith(blogPath);
 const switchItems = [
   { locale: 'en', label: 'EN', lang: 'en' },
   { locale: 'pt-br', label: 'PT', lang: 'pt-BR' },
@@ -20,7 +23,7 @@ const switchItems = [
 <header class="top">
   <a class="brand" href={localizedPath('/', locale)}>{site.initials}</a>
   <nav aria-label="Site">
-    <a href={localizedPath('/blog/', locale)}>{s.nav.blog}</a>
+    {!inBlog && <a href={blogPath}>{s.nav.blog}</a>}
     <span class="lang" role="group" aria-label={s.nav.language}>
       {
         switchItems.map((item, i) => (
@@ -47,9 +50,8 @@ const switchItems = [
     align-items: center;
     padding: 22px 30px;
     font-family: var(--font-heading);
-    font-size: 12px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.08em;
     color: var(--color-dim);
     /* first snap point on pages that snap */
     scroll-snap-align: start;
@@ -62,7 +64,8 @@ const switchItems = [
   }
 
   .brand {
-    font-weight: 500;
+    font-weight: 600;
+    letter-spacing: 0.14em;
   }
 
   nav {
