@@ -1,5 +1,6 @@
 ---
 import type { ImageMetadata } from 'astro';
+import type { SvgComponent } from 'astro/types';
 import { Image } from 'astro:assets';
 import { site } from '../config/site';
 
@@ -10,16 +11,21 @@ interface Props {
 const { size } = Astro.props;
 
 // Dropping src/assets/avatar.{png,jpg,jpeg,webp,svg} in replaces the initials; no code change.
-const found = Object.values(
-  import.meta.glob<{ default: ImageMetadata }>('/src/assets/avatar.{png,jpg,jpeg,webp,svg}', {
-    eager: true,
-  }),
-)[0];
+const [path, found] =
+  Object.entries(
+    import.meta.glob<{ default: ImageMetadata }>('/src/assets/avatar.{png,jpg,jpeg,webp,svg}', {
+      eager: true,
+    }),
+  )[0] ?? [];
+// An SVG goes inline, so the page's reduced-motion rule also stills any animation inside it.
+const Svg = path?.endsWith('.svg') ? (found!.default as unknown as SvgComponent) : undefined;
 ---
 
 <div class="avatar" style={`--size: ${size}px`}>
   {
-    found ? (
+    Svg ? (
+      <Svg width={size} height={size} role="img" aria-label={site.name} />
+    ) : found ? (
       <Image src={found.default} width={size * 2} height={size * 2} alt={site.name} loading="eager" />
     ) : (
       <span aria-hidden="true">{site.initials}</span>
