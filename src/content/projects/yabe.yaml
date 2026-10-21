@@ -5,10 +5,10 @@ website: https://yabe.pdrlabs.com.br
 en:
   title: yabe
   summary: >-
-    A Bitcoin block explorer whose indexer keeps Postgres correct across chain reorganisations.
-    Live on signet.
+    A simple Bitcoin block explorer that survives chain reorganisations.
+    Live on Signet.
 pt-br:
   title: yabe
   summary: >-
-    Um explorador de blocos Bitcoin cujo indexador mantém o Postgres correto durante reorganizações
-    da cadeia. No ar na signet.
+    Um block explorer focado na blockchain do Bitcoin que consegue lidar com chain reorganisations.
+    Atualmente está rodando na Signet.

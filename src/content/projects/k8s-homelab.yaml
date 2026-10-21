@@ -9,5 +9,5 @@ en:
 pt-br:
   title: k8s homelab
   summary: >-
-    Uma plataforma Kubernetes no estilo de produção, em uma única máquina em casa: tudo é código e
-    toda mudança é um pull request. Este site roda nela.
+    Um homelab Kubernetes com estrutura de cluster de produção: tudo é declarado via código e
+    toda mudança é um pull request. Este website está deployado neste cluster.

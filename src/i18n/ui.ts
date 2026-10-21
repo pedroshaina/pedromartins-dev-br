@@ -49,7 +49,9 @@ export const ui: Record<Locale, UiStrings> = {
       description: 'Pedro Shainã Martins, senior software engineer: projects and writing.',
       // TODO(Pedro): the real intro sentence.
       intro: [
-        'Senior software engineer, 12+ years across industries. I build backend systems that keep working when things go wrong.',
+        'Senior software engineer, 12+ years across different industries',
+        'Experienced in different languages and technologies, I build systems end-to-end that keep working when things go wrong.',
+        'Bitcoin enthusiast & Coffee drinker'
       ],
       stackLabel: 'Stack',
       projectsLabel: 'Projects',
@@ -82,15 +84,17 @@ export const ui: Record<Locale, UiStrings> = {
   'pt-br': {
     nav: { blog: 'Blog', language: 'Idioma' },
     home: {
-      description: 'Pedro Shainã Martins, engenheiro de software sênior: projetos e textos.',
+      description: 'Pedro Shainã Martins, engenheiro de software sênior: projetos e blog.',
       // TODO(Pedro): a frase de apresentação de verdade.
       intro: [
-        'Engenheiro de software sênior com mais de 12 anos de experiência em diferentes indústrias. Meu foco é construir sistemas de backend e soluções que não param quando algo dá errado.',
+        'Engenheiro de software sênior com mais de 12 anos de experiência em diferentes indústrias',
+        'Atuando em várias linguagens diferentes, eu construo soluções completas que continuam funcionando quando algo dá errado.',
+        'Entusiasta em Bitcoin e apreciador de Café.'
       ],
       stackLabel: 'Tecnologias',
       projectsLabel: 'Projetos',
       allPosts: 'Todos os posts',
-      scrollHint: 'Role',
+      scrollHint: 'Role para baixo',
     },
     project: {
       github: 'GitHub ↗',
