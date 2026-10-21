@@ -15,7 +15,9 @@ const s = t(Astro.props.locale);
   <div class="mid">
     <Avatar size={92} />
     <h1>{site.name}</h1>
-    <p>{s.home.intro}</p>
+    <div class="text">
+      {s.home.intro.map((paragraph) => <p>{paragraph}</p>)}
+    </div>
     <ul class="links">
       <li><a href={site.links.github}>GitHub</a></li>
       <li><a href={site.links.linkedin}>LinkedIn</a></li>
@@ -49,9 +51,17 @@ const s = t(Astro.props.locale);
     margin: 18px 0 0;
   }
 
-  p {
-    max-width: 360px;
+  .text {
+    max-width: 520px;
     margin: 10px 0 16px;
+  }
+
+  .text p {
+    margin: 0 0 10px;
+  }
+
+  .text p:last-child {
+    margin-bottom: 0;
   }
 
   .links {
