@@ -19,8 +19,8 @@ const s = t(Astro.props.locale);
       {s.home.intro.map((paragraph) => <p>{paragraph}</p>)}
     </div>
     <ul class="links">
-      <li><a href={site.links.github}>GitHub</a></li>
-      <li><a href={site.links.linkedin}>LinkedIn</a></li>
+      <li><a href={site.links.github} target="_blank">GitHub</a></li>
+      <li><a href={site.links.linkedin} target="_blank">LinkedIn</a></li>
       <li><a href={site.links.email}>Email</a></li>
     </ul>
   </div>
