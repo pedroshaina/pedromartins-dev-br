@@ -1,14 +1,18 @@
 ---
 import { formatDate, type Locale } from '../i18n/locales';
+import { t } from '../i18n/ui';
 import { postHref, type Post } from '../lib/content';
 
 interface Props {
   posts: Post[];
   locale: Locale;
   order: 'newest' | 'oldest';
+  /** Label each post "Part N": for a project's posts, which read as a series. */
+  numbered?: boolean;
 }
 
-const { posts, locale, order } = Astro.props;
+const { posts, locale, order, numbered = false } = Astro.props;
+const s = t(locale);
 const sorted = [...posts].sort((a, b) => {
   const d = a.entry.data.pubDate.getTime() - b.entry.data.pubDate.getTime();
   return order === 'oldest' ? d : -d;
@@ -17,14 +21,15 @@ const sorted = [...posts].sort((a, b) => {
 
 <ul class="posts">
   {
-    sorted.map((post) => (
+    sorted.map((post, i) => (
       <li class="post">
         <div class="head">
+          {numbered && <span class="part">{s.post.part(i + 1)}</span>}
           <a href={postHref(post)}>{post.entry.data.title}</a>
-          <time datetime={post.entry.data.pubDate.toISOString()}>
-            {formatDate(post.entry.data.pubDate, locale)}
-          </time>
         </div>
+        <time datetime={post.entry.data.pubDate.toISOString()}>
+          {formatDate(post.entry.data.pubDate, locale)}
+        </time>
         <p>{post.entry.data.description}</p>
       </li>
     ))
@@ -39,20 +44,31 @@ const sorted = [...posts].sort((a, b) => {
   }
 
   .post {
-    padding: 16px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 24px;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   }
 
-  .head {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: baseline;
-    column-gap: 20px;
+  .post:first-child {
+    padding-top: 0;
+  }
+
+  .part {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--color-magenta);
+    margin-bottom: 4px;
   }
 
   a {
-    color: var(--color-emphasis);
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.25;
+    color: var(--color-heading);
     text-decoration: none;
   }
 
@@ -61,10 +77,33 @@ const sorted = [...posts].sort((a, b) => {
     font-size: 13px;
     color: var(--color-dim);
     white-space: nowrap;
+    padding-top: 6px;
   }
 
   p {
-    margin: 4px 0 0;
-    font-size: 15px;
+    grid-column: 1;
+    max-width: 64ch;
+    margin: 6px 0 0;
+    font-size: 15.5px;
+  }
+
+  /* With a Part label above the title, the date lines up with the title instead. */
+  .head:has(.part) + time {
+    padding-top: 30px;
+  }
+
+  @media (max-width: 480px) {
+    .post {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    time {
+      grid-row: 1;
+      padding-top: 0;
+    }
+
+    .head:has(.part) + time {
+      padding-top: 0;
+    }
   }
 </style>

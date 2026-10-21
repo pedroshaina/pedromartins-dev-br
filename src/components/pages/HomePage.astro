@@ -3,7 +3,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import IntroScreen from '../home/IntroScreen.astro';
 import StackSection from '../home/StackSection.astro';
 import ProjectsSection from '../home/ProjectsSection.astro';
-import BlogSection from '../home/BlogSection.astro';
 import { site } from '../../config/site';
 import type { Locale } from '../../i18n/locales';
 import { t } from '../../i18n/ui';
@@ -22,5 +21,4 @@ const [posts, projects] = await Promise.all([getPosts(locale), getProjects(local
   <IntroScreen locale={locale} />
   <StackSection locale={locale} />
   <ProjectsSection locale={locale} projects={projects} posts={posts} />
-  {posts.length > 0 && <BlogSection locale={locale} posts={posts} />}
 </BaseLayout>

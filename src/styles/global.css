@@ -19,6 +19,7 @@ html {
    Known gap: Chrome can stop between screens when a key is pressed again mid-jump. */
 html.snap {
   scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
 }
 
 body {

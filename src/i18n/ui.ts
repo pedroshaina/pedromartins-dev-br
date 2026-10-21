@@ -12,7 +12,6 @@ export type UiStrings = {
     intro: string[];
     stackLabel: string;
     projectsLabel: string;
-    blogLabel: string;
     allPosts: string;
     scrollHint: string;
   };
@@ -27,6 +26,8 @@ export type UiStrings = {
   };
   post: {
     partOf: (n: number, m: number, project: string) => string;
+    /** A post's place in its project's list. */
+    part: (n: number) => string;
     minRead: string;
     previous: string;
     next: string;
@@ -45,33 +46,33 @@ export const ui: Record<Locale, UiStrings> = {
   en: {
     nav: { blog: 'Blog', language: 'Language' },
     home: {
-      description: 'Pedro Martins, senior software engineer: projects and writing.',
+      description: 'Pedro Shainã Martins, senior software engineer: projects and writing.',
       // TODO(Pedro): the real intro sentence.
       intro: [
         'Senior software engineer, 12+ years across industries. I build backend systems that keep working when things go wrong.',
       ],
       stackLabel: 'Stack',
       projectsLabel: 'Projects',
-      blogLabel: 'Blog',
       allPosts: 'All posts',
-      scrollHint: 'Scroll ↓',
+      scrollHint: 'Scroll',
     },
     project: {
       github: 'GitHub ↗',
       website: 'Website ↗',
-      readOnBlog: 'Read about it on the blog →',
+      readOnBlog: 'Read about it on the blog',
     },
     blog: {
-      description: 'Posts by Pedro Martins on the projects he builds.',
+      description: 'Posts by Pedro Shainã Martins on the projects he builds.',
       projectDescription: (project) => `Posts about ${project}, oldest first.`,
     },
     post: {
       partOf: (n, m, project) => `Part ${n} of ${m} on ${project}`,
+      part: (n) => `Part ${n}`,
       minRead: 'min',
       previous: 'Previous',
       next: 'Next',
     },
-    rss: { title: 'Pedro Martins · Blog' },
+    rss: { title: 'Pedro Shainã Martins · Blog' },
     notFound: {
       title: 'Page not found',
       body: 'There is nothing at this address.',
@@ -81,33 +82,33 @@ export const ui: Record<Locale, UiStrings> = {
   'pt-br': {
     nav: { blog: 'Blog', language: 'Idioma' },
     home: {
-      description: 'Pedro Martins, engenheiro de software sênior: projetos e textos.',
+      description: 'Pedro Shainã Martins, engenheiro de software sênior: projetos e textos.',
       // TODO(Pedro): a frase de apresentação de verdade.
       intro: [
         'Engenheiro de software sênior com mais de 12 anos de experiência em diferentes indústrias. Meu foco é construir sistemas de backend e soluções que não param quando algo dá errado.',
       ],
       stackLabel: 'Tecnologias',
       projectsLabel: 'Projetos',
-      blogLabel: 'Blog',
       allPosts: 'Todos os posts',
-      scrollHint: 'Role ↓',
+      scrollHint: 'Role',
     },
     project: {
       github: 'GitHub ↗',
       website: 'Site ↗',
-      readOnBlog: 'Leia sobre no blog →',
+      readOnBlog: 'Leia sobre no blog',
     },
     blog: {
-      description: 'Textos de Pedro Martins sobre os projetos que ele constrói.',
+      description: 'Textos de Pedro Shainã Martins sobre os projetos que ele constrói.',
       projectDescription: (project) => `Posts sobre ${project}, do mais antigo ao mais recente.`,
     },
     post: {
       partOf: (n, m, project) => `Parte ${n} de ${m} sobre ${project}`,
+      part: (n) => `Parte ${n}`,
       minRead: 'min',
       previous: 'Anterior',
       next: 'Próximo',
     },
-    rss: { title: 'Pedro Martins · Blog (português)' },
+    rss: { title: 'Pedro Shainã Martins · Blog (português)' },
     notFound: {
       title: 'Página não encontrada',
       body: 'Não há nada neste endereço.',

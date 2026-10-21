@@ -3,8 +3,6 @@ import type { Locale } from '../i18n/locales';
 export type StackCategory = {
   label: Record<Locale, string>;
   items: string[];
-  /** Spans both columns on wide screens (long lists). */
-  wide?: boolean;
 };
 
 // The home page's Stack screen. Technology names are the same in every language.
@@ -12,7 +10,7 @@ export const stack: StackCategory[] = [
   { label: { en: 'Languages', 'pt-br': 'Linguagens' }, items: ['TypeScript', 'Java', 'SQL'] },
   {
     label: { en: 'Backend frameworks', 'pt-br': 'Frameworks de backend' },
-    items: ['Node.js (Fastify / Express)', 'Spring Boot'],
+    items: ['Node.js (Fastify, Express)', 'Spring Boot'],
   },
   { label: { en: 'Frontend', 'pt-br': 'Frontend' }, items: ['React', 'Next.js'] },
   { label: { en: 'Database', 'pt-br': 'Banco de dados' }, items: ['PostgreSQL', 'MySQL'] },
@@ -23,22 +21,7 @@ export const stack: StackCategory[] = [
   { label: { en: 'Cloud providers', 'pt-br': 'Provedores de nuvem' }, items: ['AWS', 'GCP'] },
   {
     label: { en: 'Infrastructure & platform', 'pt-br': 'Infraestrutura e plataforma' },
-    items: [
-      'Kubernetes',
-      'Talos Linux',
-      'Proxmox',
-      'Docker',
-      'Argo CD',
-      'Helm',
-      'OpenTofu',
-      'Cilium',
-      'cert-manager',
-      'External Secrets',
-      'SOPS',
-      'Cloudflare',
-      'GitHub Actions',
-    ],
-    wide: true,
+    items: ['Kubernetes (Talos Linux)', 'Docker', 'Argo CD', 'OpenTofu/Terraform'],
   },
   {
     label: { en: 'Observability', 'pt-br': 'Observabilidade' },

@@ -1,0 +1,27 @@
+---
+// A home screen's title, centred between two short magenta lines.
+---
+
+<h2 class="title"><slot /></h2>
+
+<style>
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    font-size: 30px;
+    line-height: 1.1;
+    margin: 0 0 48px;
+  }
+
+  .title::before,
+  .title::after {
+    content: '';
+    width: 22px;
+    height: 2px;
+    flex-shrink: 0;
+    background: var(--color-magenta);
+    box-shadow: 0 0 8px rgba(255, 42, 109, 0.6);
+  }
+</style>

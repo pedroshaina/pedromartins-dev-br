@@ -137,7 +137,8 @@ dim/body tokens as little as needed to meet AA for text; decorative uses can sta
 
 - The avatar's magenta glow is the one strong neon element on the page.
 - Links and project titles light up (cyan, soft text glow) on hover/focus. Nothing animates on its
-  own. Respect `prefers-reduced-motion`.
+  own, with one exception Pedro asked for (2026-10-20): the home page's "Scroll" hint bounces
+  gently, pauses while hovered or focused, and stays still under `prefers-reduced-motion`.
 
 ### 4.4 Avatar
 
@@ -150,35 +151,44 @@ placeholder is used while that file is absent *(mechanism: builder's call)*.
 
 ### 5.1 Every page
 
-**Top bar** (site navigation only): `PM` on the left → home. On the right: **Projects** (→ the
-home page's projects section) · **Blog** (→ blog index) · **EN | PT** language switch, which
-keeps you on the same page in the other language. Personal links never go in the top bar.
+**Top bar** (site navigation only): `PM` on the left → home. On the right: **Blog** (→ blog index;
+hidden on every page under `/blog/`) and the **EN | PT** language switch, which keeps you on the
+same page in the other language. Personal links never go in the top bar. *(Revised 2026-10-20:
+Projects link removed.)*
 
 **Footer:** quiet one line: © year, GitHub · LinkedIn · Email.
 
-### 5.2 Home: one section per screen, scrolling down
+### 5.2 Home: one section per screen, snapping
 
-1. **Intro screen** (centred, roughly a full viewport): avatar, **Pedro Martins**, one-sentence
-   intro, then **only Pedro's personal links: GitHub · LinkedIn · Email**. A subtle "scroll ↓" hint.
-   The full about paragraph may live here or be the intro sentence itself *(builder's call; keep
-   the screen as sparse as the mockup)*.
-2. **Projects**: section label, then each project separated by thin divider lines with generous
-   spacing. Per project:
+*(Revised 2026-10-20.)* Three full screens; scrolling snaps a whole screen at a time. Everything is
+centred on the page. Section titles are Oxanium, normal case, between two short magenta lines
+("— Stack —").
+
+1. **Intro**: avatar above **Pedro Shainã Martins** (Oxanium 600, 64 px on desktop), the intro
+   (one or more paragraphs, centred, up to about 60 characters a line), then **only Pedro's personal
+   links: GitHub · LinkedIn · Email**. A "Scroll ↓" hint at the bottom links to the next screen.
+2. **Stack**: technologies grouped by category, as plain text (category name, then the items
+   separated by commas) in a centred three-column grid. The list lives in `src/config/stack.ts`.
+3. **Projects**: two equal columns (an odd last project leaves the right cell empty), each project
+   with a thin line under it. Per project:
    - title, with **"GitHub ↗"** and **"Website ↗"** links right next to it, each shown only if the
      project has it (homelab: GitHub only, the public `k8s-homelab` repo; yabe: both);
    - one or two sentences;
-   - **"Read about it on the blog →"**: if the project has one post, it goes straight to it;
+   - **"Read about it on the blog"**: if the project has one post, it goes straight to it;
      with several, to the blog filtered to that project, oldest first *(builder's call)*;
      hidden if the project has no published posts yet.
-3. **Blog**: section label, the latest posts (3 *(builder's call)*) as plain lines (title, date),
-   then "All posts".
+
+   The footer shares this last screen. There is no blog screen; the blog is reached from the top
+   bar and from each project's link.
 
 No tags, stats, boxes, or tech badges anywhere on the home page.
 
 ### 5.3 Blog index
 
-Same calm style: all posts, newest first, title + date (+ the post's description, if it reads
-well; *builder's call*). A per-project filtered view at a stable URL, linked from §5.2.
+Same calm style, no snapping. The page title (with one magenta line before it) sits in a left
+column, the posts on the right: all posts, newest first, each with its title (Oxanium), date and
+description. A per-project filtered view at a stable URL, linked from §5.2: the project's name, a
+one-line description and "All posts" on the left; its posts oldest first, each labelled "Part N".
 
 ### 5.4 Post
 
@@ -190,7 +200,9 @@ series when the post has one, otherwise chronological *(builder's call)*) and "A
 
 ### 5.5 Responsive
 
-Must work well at phone width; the home's per-screen sections become normal stacked sections.
+Must work well at phone width: the home keeps its screens, but each lays out in one column, and
+a screen taller than the phone scrolls before the next snap. Blog pages stack the title above the
+posts.
 
 ## 6. Content model
 
