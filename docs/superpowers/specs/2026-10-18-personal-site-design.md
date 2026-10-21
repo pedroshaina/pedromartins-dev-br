@@ -135,7 +135,7 @@ dim/body tokens as little as needed to meet AA for text; decorative uses can sta
 ### 4.3 Effects
 
 - The avatar's magenta glow is the one strong neon element on the page.
-- Links and project titles light up (cyan, soft text glow) on hover/focus. Nothing animates on its
+- Links light up (cyan, soft text glow) on hover/focus; project titles don't react to hover. Nothing animates on its
   own, with two exceptions Pedro asked for (2026-10-20): the home page's "Scroll" hint bounces
   gently and pauses while hovered or focused, and the avatar's neon pixels pulse slowly (3 s).
   Both stay still under `prefers-reduced-motion`.
