@@ -5,7 +5,7 @@ import night from './src/styles/shiki-night.json' with { type: 'json' };
 
 // https://astro.build/config
 export default defineConfig({
-  site: process.env.SITE_URL ?? 'https://portfolio.pdrlabs.com.br',
+  site: process.env.SITE_URL ?? 'https://pedromartins.dev.br',
   output: 'static',
   trailingSlash: 'always',
   build: { format: 'directory' },

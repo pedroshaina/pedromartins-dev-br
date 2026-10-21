@@ -262,6 +262,9 @@ brainstormed separately **after** this site is live at `portfolio.pdrlabs.com.br
 this project should hard-code the hostname beyond configuration (Astro `site`, the HTTPRoute), so
 the switch is a config change on the site's side. It's also a good blog post.
 
+*(2026-10-21: the site is live at `pedromartins.dev.br`; Astro `site` now defaults to it, so
+canonical, Open Graph, sitemap and RSS URLs use the public domain.)*
+
 ## 10. Working style
 
 Per Pedro's standing instructions: the plan splits this into phases, each a reviewable chunk that
