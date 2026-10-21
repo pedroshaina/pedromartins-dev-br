@@ -11,4 +11,7 @@
   --font-heading: 'Oxanium', system-ui, sans-serif;
   --font-body: 'IBM Plex Sans', system-ui, sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  /* One line of footer: the home page's last screen leaves this much room for it. */
+  --footer-height: 62px;
 }

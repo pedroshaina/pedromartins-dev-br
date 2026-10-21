@@ -15,6 +15,12 @@ html {
   color-scheme: dark;
 }
 
+/* The home page scrolls a whole screen at a time and never rests between two.
+   Known gap: Chrome can stop between screens when a key is pressed again mid-jump. */
+html.snap {
+  scroll-snap-type: y mandatory;
+}
+
 body {
   margin: 0;
   background: var(--color-bg);

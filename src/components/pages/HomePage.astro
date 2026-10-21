@@ -17,7 +17,7 @@ const s = t(locale);
 const [posts, projects] = await Promise.all([getPosts(locale), getProjects(locale)]);
 ---
 
-<BaseLayout title={site.name} description={s.home.description} locale={locale}>
+<BaseLayout title={site.name} description={s.home.description} locale={locale} snap>
   <IntroScreen locale={locale} />
   <ProjectsSection locale={locale} projects={projects} posts={posts} />
   {posts.length > 0 && <BlogSection locale={locale} posts={posts} />}
