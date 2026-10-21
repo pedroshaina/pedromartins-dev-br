@@ -61,6 +61,17 @@ const s = t(Astro.props.locale);
     margin: 0 0 12px;
   }
 
+  /* The intro runs three paragraphs; on a phone it must still leave room for the hint. */
+  @media (max-width: 719px) {
+    h1 {
+      margin: 20px 0 16px;
+    }
+
+    .text {
+      font-size: 16px;
+    }
+  }
+
   .links {
     display: flex;
     gap: 26px;
@@ -79,6 +90,7 @@ const s = t(Astro.props.locale);
   /* The one thing that moves on its own: a small bounce, paused while pointed at or focused. */
   .hint {
     align-self: center;
+    margin-top: 16px;
     display: inline-flex;
     flex-direction: column;
     align-items: center;
