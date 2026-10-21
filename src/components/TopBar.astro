@@ -2,6 +2,7 @@
 import { site } from '../config/site';
 import { localizedPath, type Locale } from '../i18n/locales';
 import { t } from '../i18n/ui';
+import { getPosts } from '../lib/content';
 
 interface Props {
   locale: Locale;
@@ -12,8 +13,8 @@ const { locale, switchPaths } = Astro.props;
 const s = t(locale);
 const path = Astro.url.pathname;
 const blogPath = localizedPath('/blog/', locale);
-// Inside the blog the link would point at where you already are.
-const inBlog = path.startsWith(blogPath);
+// No link until there's a post to read (drafts count in dev), nor inside the blog itself.
+const showBlog = (await getPosts(locale)).length > 0 && !path.startsWith(blogPath);
 const switchItems = [
   { locale: 'en', label: 'EN', lang: 'en' },
   { locale: 'pt-br', label: 'PT', lang: 'pt-BR' },
@@ -23,7 +24,7 @@ const switchItems = [
 <header class="top">
   <a class="brand" href={localizedPath('/', locale)}>{site.initials}</a>
   <nav aria-label="Site">
-    {!inBlog && <a href={blogPath}>{s.nav.blog}</a>}
+    {showBlog && <a href={blogPath}>{s.nav.blog}</a>}
     <span class="lang" role="group" aria-label={s.nav.language}>
       {
         switchItems.map((item, i) => (
@@ -65,7 +66,7 @@ const switchItems = [
 
   .brand {
     font-weight: 600;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.4em;
   }
 
   nav {
