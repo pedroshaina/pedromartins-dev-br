@@ -1,6 +1,6 @@
 export const site = {
   name: 'Pedro Shainã Martins',
-  initials: 'PM',
+  initials: 'PSM',
   links: {
     github: 'https://github.com/pedroshaina',
     // TODO(Pedro): real LinkedIn profile URL
