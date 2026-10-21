@@ -60,6 +60,14 @@ const s = t(locale);
     scroll-snap-stop: always;
   }
 
+  /* On phones the list is left-aligned edge to edge, so it needs more room than the centred screens. */
+  @media (max-width: 719px) {
+    .screen {
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+  }
+
   /* The last screen shares the window with the footer, which is where it snaps. */
   .screen:last-child {
     min-height: calc(100svh - var(--footer-height));
