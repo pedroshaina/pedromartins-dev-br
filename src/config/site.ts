@@ -3,9 +3,7 @@ export const site = {
   initials: 'PSM',
   links: {
     github: 'https://github.com/pedroshaina',
-    // TODO(Pedro): real LinkedIn profile URL
-    linkedin: 'https://www.linkedin.com/in/TODO',
-    // TODO(Pedro): real contact address
-    email: 'mailto:TODO@pedromartins.dev.br',
+    linkedin: 'https://www.linkedin.com/in/pedroshaina',
+    email: 'mailto:pedroshaina_@hotmail.com',
   },
 } as const;
