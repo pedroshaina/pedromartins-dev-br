@@ -41,7 +41,6 @@ read a project write-up. Pedro can publish a post (in both languages) by merging
   banner). Cloudflare's dashboard gives basic traffic numbers.
 - A light theme. The site is dark only; the look depends on it.
 - Serving at `pedromartins.dev.br` (separate project, §9).
-- The real avatar. The site ships with a placeholder (§4.4).
 
 **Anti-goals: things that would make it a failure even if it works**
 
@@ -137,15 +136,21 @@ dim/body tokens as little as needed to meet AA for text; decorative uses can sta
 
 - The avatar's magenta glow is the one strong neon element on the page.
 - Links and project titles light up (cyan, soft text glow) on hover/focus. Nothing animates on its
-  own, with one exception Pedro asked for (2026-10-20): the home page's "Scroll" hint bounces
-  gently, pauses while hovered or focused, and stays still under `prefers-reduced-motion`.
+  own, with two exceptions Pedro asked for (2026-10-20): the home page's "Scroll" hint bounces
+  gently and pauses while hovered or focused, and the avatar's neon pixels pulse slowly (3 s).
+  Both stay still under `prefers-reduced-motion`.
 
 ### 4.4 Avatar
 
-Pedro wants a **cartoon avatar** of himself; it doesn't exist yet and how it'll be made is
-undecided. Ship a placeholder: a circle with a magenta ring and glow, "PM" in Oxanium. Swapping in
-the real image must be replacing one file (e.g. `src/assets/avatar.*`) with no code change; the
-placeholder is used while that file is absent *(mechanism: builder's call)*.
+A **cartoon avatar** of Pedro as a cyberpunk character, not a likeness *(made 2026-10-20)*: 8-bit
+pixel art on a 32×32 grid, black hair swept up at the front with faded sides running into a full
+beard, a round face, a dark jacket with a magenta collar, a cyan rim light, and over-ear headphones
+with a cyan light on one cup and magenta on the other. The neon pixels pulse (§4.3).
+
+It lives in `src/assets/avatar.svg`. An SVG avatar is inlined into the page so the site's
+reduced-motion rule reaches its animation (inside an `<img>` it would keep moving); a raster file
+(`avatar.png`, `.jpg`, `.webp`) still works and is shown as an image. With no file at all, the
+"PM" placeholder in a magenta ring is shown.
 
 ## 5. Pages
 
@@ -265,6 +270,5 @@ acting.
 
 ## 11. Open, not blocking
 
-- How the avatar gets made (commission, AI tool, or an SVG): Pedro decides later.
 - The real intro, about paragraph, project summaries and posts: Pedro writes them.
 - visttor joins as a project once it has UI mockups.
