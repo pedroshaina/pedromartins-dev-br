@@ -159,8 +159,8 @@ reduced-motion rule reaches its animation (inside an `<img>` it would keep movin
 **Top bar** (site navigation only): `P S M` (the full name's initials, letter-spaced) on the left →
 home. On the right: **Blog** (→ blog index; hidden on every page under `/blog/`, and everywhere
 until the first post is published) and the **EN | PT** language switch, which keeps you on the
-same page in the other language. Personal links never go in the top bar. *(Revised 2026-10-20:
-Projects link removed; initials and the hidden-until-published Blog link added.)*
+same page in the other language; the current language is bright with a short magenta line under it, the other dim. Personal links never go in the top bar. *(Revised 2026-10-20:
+Projects link removed; initials and the hidden-until-published Blog link added. Revised 2026-10-21: current language underlined.)*
 
 **Footer:** quiet one line: © year, GitHub · LinkedIn · Email.
 

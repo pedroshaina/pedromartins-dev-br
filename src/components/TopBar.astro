@@ -75,8 +75,26 @@ const switchItems = [
     align-items: center;
   }
 
-  .current {
+  /* The selected language: bright, with the site's magenta line under it; the other one recedes. */
+  .lang a {
     color: var(--color-dim);
+  }
+
+  .current {
+    position: relative;
+    color: var(--color-emphasis);
+  }
+
+  /* Stops short of the trailing letter-spacing so it sits under the letters only. */
+  .current::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0.08em;
+    bottom: -5px;
+    height: 2px;
+    background: var(--color-magenta);
+    box-shadow: 0 0 8px rgba(255, 42, 109, 0.6);
   }
 
   @media (max-width: 480px) {
