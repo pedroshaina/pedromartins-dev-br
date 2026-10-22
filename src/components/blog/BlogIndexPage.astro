@@ -8,7 +8,6 @@ import { getPosts, type Project } from '../../lib/content';
 
 interface Props {
   locale: Locale;
-  /** Set for the per-project list: that project's posts, oldest first. */
   project?: Project;
 }
 
@@ -58,7 +57,6 @@ const description = project ? s.blog.projectDescription(project.title) : s.blog.
     }
   }
 
-  /* Same title device as the home screens, on the left edge only. */
   h1 {
     display: flex;
     align-items: center;

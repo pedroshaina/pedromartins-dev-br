@@ -5,7 +5,7 @@ export type StackCategory = {
   items: string[];
 };
 
-// The home page's Stack screen. Technology names are the same in every language.
+// Technology names are the same in every language.
 export const stack: StackCategory[] = [
   { label: { en: 'Languages', 'pt-br': 'Linguagens' }, items: ['TypeScript', 'Java', 'SQL'] },
   {

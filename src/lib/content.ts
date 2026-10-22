@@ -54,7 +54,6 @@ export function assertTranslations(
 // `![](src)` / `![ ](src)` and `<img>` without a non-empty alt attribute.
 const imageWithoutAlt = /!\[\s*\]\(([^)]*)\)|<img\b(?![^>]*\balt\s*=\s*["'][^"']*\S)[^>]*>/g;
 
-/** Throws if a post's Markdown has an image without alt text (spec §8: alt text required). */
 export function assertImageAlts(entries: CollectionEntry<'posts'>[]): void {
   const missing = entries.flatMap((entry) =>
     [...(entry.body ?? '').matchAll(imageWithoutAlt)].map((m) => `${entry.id}: ${m[1] ?? m[0]}`),
@@ -76,7 +75,7 @@ function checkOnce(): Promise<void> {
   return checked;
 }
 
-/** Published posts in `locale`, newest first. `astro dev` includes drafts. */
+/** Newest first. `astro dev` includes drafts. */
 export async function getPosts(locale: Locale): Promise<Post[]> {
   await checkOnce();
   const entries = await getCollection(
@@ -102,7 +101,6 @@ export async function getProjects(locale: Locale): Promise<Project[]> {
     .sort((a, b) => a.order - b.order);
 }
 
-/** The post's place among its project's posts, oldest first; undefined if it has no project. */
 export function getSeries(
   post: Post,
   posts: Post[],
@@ -129,7 +127,6 @@ export function projectBlogHref(project: Project, posts: Post[], locale: Locale)
   return localizedPath(`/blog/project/${project.slug}/`, locale);
 }
 
-/** Minutes at 200 words per minute, at least 1. */
 export function readingTime(body: string): number {
   const words = body.trim().split(/\s+/).filter(Boolean).length;
   return Math.max(1, Math.ceil(words / 200));
