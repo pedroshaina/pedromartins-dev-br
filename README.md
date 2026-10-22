@@ -69,4 +69,5 @@ and Argo CD rolls it out on the cluster.
 
 ## License
 
-The code is under the [MIT License](LICENSE).
+The code is under the [MIT License](LICENSE). The blog posts in `src/content/posts/` are not:
+they are © Pedro Shainã Martins, all rights reserved ([details](src/content/posts/LICENSE)).
