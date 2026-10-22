@@ -1,0 +1,26 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BlogIndexPage from '../../../../components/blog/BlogIndexPage.astro';
+import { localePaths, type Locale } from '../../../../i18n/locales';
+import { getPosts, getProjects, type Project } from '../../../../lib/content';
+
+// Only projects with 2+ posts get a list; with one, the home page links straight to the post.
+export const getStaticPaths = (async () => {
+  const paths = await Promise.all(
+    localePaths().map(async ({ params, props }) => {
+      const [posts, projects] = await Promise.all([getPosts(props.locale), getProjects(props.locale)]);
+      return projects
+        .filter((project) => posts.filter((p) => p.entry.data.project === project.slug).length >= 2)
+        .map((project) => ({
+          params: { ...params, project: project.slug },
+          props: { ...props, project },
+        }));
+    }),
+  );
+  return paths.flat();
+}) satisfies GetStaticPaths;
+
+const { locale, project } = Astro.props as { locale: Locale; project: Project };
+---
+
+<BlogIndexPage locale={locale} project={project} />

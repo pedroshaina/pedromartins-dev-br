@@ -1,0 +1,12 @@
+---
+import type { GetStaticPaths } from 'astro';
+import NotFoundPage from '../../components/common/NotFoundPage.astro';
+import { localePaths, prefixedLocales, type Locale } from '../../i18n/locales';
+
+// The default locale's 404 is `src/pages/404.astro`, which Astro builds as `404.html`.
+export const getStaticPaths = (() => localePaths(prefixedLocales)) satisfies GetStaticPaths;
+
+const { locale } = Astro.props as { locale: Locale };
+---
+
+<NotFoundPage locale={locale} />

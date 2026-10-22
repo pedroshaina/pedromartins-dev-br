@@ -1,6 +1,6 @@
 ---
 import { site } from '../../config/site';
-import { localizedPath, type Locale } from '../../i18n/locales';
+import { languageTag, localizedPath, locales, switchLabel, type Locale } from '../../i18n/locales';
 import { t } from '../../i18n/ui';
 import { getPosts } from '../../lib/content';
 
@@ -15,10 +15,7 @@ const path = Astro.url.pathname;
 const blogPath = localizedPath('/blog/', locale);
 // No link until there's a post to read (drafts count in dev), nor inside the blog itself.
 const showBlog = (await getPosts(locale)).length > 0 && !path.startsWith(blogPath);
-const switchItems = [
-  { locale: 'en', label: 'EN', lang: 'en' },
-  { locale: 'pt-br', label: 'PT', lang: 'pt-BR' },
-] as const;
+const switchItems = locales.map((l) => ({ locale: l, label: switchLabel[l], lang: languageTag[l] }));
 ---
 
 <header class="top">
