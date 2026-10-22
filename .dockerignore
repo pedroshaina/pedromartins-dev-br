@@ -1,11 +1,8 @@
 .git
 .github
 .astro
-.superpowers
-.playwright-mcp
 .vscode
 node_modules
 dist
-docs
 Dockerfile
 README.md
