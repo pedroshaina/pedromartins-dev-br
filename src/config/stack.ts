@@ -16,7 +16,7 @@ export const stack: StackCategory[] = [
   { label: { en: 'Database', 'pt-br': 'Banco de dados' }, items: ['PostgreSQL', 'MySQL'] },
   {
     label: { en: 'Queues & events', 'pt-br': 'Filas e eventos' },
-    items: ['RabbitMQ', 'Apache Kafka', 'AWS SNS + SQS', 'GCP Cloud Pub/Sub'],
+    items: ['Apache Kafka', 'AWS SNS + SQS', 'GCP Cloud Pub/Sub'],
   },
   { label: { en: 'Cloud providers', 'pt-br': 'Provedores de nuvem' }, items: ['AWS', 'GCP'] },
   {
@@ -25,7 +25,7 @@ export const stack: StackCategory[] = [
   },
   {
     label: { en: 'Observability', 'pt-br': 'Observabilidade' },
-    items: ['Prometheus', 'Grafana', 'Loki', 'Alloy', 'Pino', 'Splunk'],
+    items: ['Prometheus', 'Grafana', 'Loki', 'Alloy', 'Splunk'],
   },
   {
     label: { en: 'Testing', 'pt-br': 'Testes' },
