@@ -63,7 +63,7 @@ a {
 body a:hover,
 body a:focus-visible {
   color: var(--color-cyan);
-  text-shadow: 0 0 10px rgba(5, 217, 232, 0.5);
+  text-shadow: 0 0 10px var(--color-cyan-glow);
 }
 
 :focus-visible {

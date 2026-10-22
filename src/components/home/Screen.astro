@@ -1,0 +1,41 @@
+---
+import Heading from '@/components/common/Heading.astro';
+
+interface Props {
+  id: string;
+  title: string;
+  width: number;
+}
+
+const { id, title, width } = Astro.props;
+---
+
+<section id={id} class="screen">
+  <div class="col" style={`--width: ${width}px`}>
+    <Heading>{title}</Heading>
+    <slot />
+  </div>
+</section>
+
+<style>
+  .screen {
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding: 64px 16px;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  /* The last screen shares the window with the footer, which is where it snaps. */
+  .screen:last-child {
+    min-height: calc(100svh - var(--footer-height));
+    scroll-snap-align: none;
+  }
+
+  .col {
+    width: 100%;
+    max-width: var(--width);
+    margin: 0 auto;
+  }
+</style>

@@ -84,7 +84,7 @@ const s = t(Astro.props.locale);
   .links a {
     color: var(--color-emphasis);
     text-decoration: none;
-    border-bottom: 1px solid rgba(255, 42, 109, 0.6);
+    border-bottom: 1px solid var(--color-magenta-glow);
   }
 
   .hint {
@@ -106,7 +106,7 @@ const s = t(Astro.props.locale);
     font-size: 16px;
     line-height: 1;
     color: var(--color-magenta);
-    text-shadow: 0 0 8px rgba(255, 42, 109, 0.6);
+    text-shadow: 0 0 8px var(--color-magenta-glow);
     transition: color 0.2s, text-shadow 0.2s;
   }
 
@@ -118,7 +118,7 @@ const s = t(Astro.props.locale);
   .hint:hover span,
   .hint:focus-visible span {
     color: var(--color-cyan);
-    text-shadow: 0 0 10px rgba(5, 217, 232, 0.6);
+    text-shadow: 0 0 10px var(--color-cyan-glow);
   }
 
   @keyframes nudge {
