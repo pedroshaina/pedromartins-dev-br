@@ -1,7 +1,6 @@
-# homelab-apps-ci-cd-template release v1 (homelab ADR-0024)
-# A merge to master tests, builds and pushes every image to GHCR (tag = commit SHA), then pins them
-# in homelab-apps-gitops apps/<APP>/kustomization.yaml as homelab-apps-release[bot]; Argo CD deploys
-# that commit. Pull requests test and build only. Edit only the two CONFIG blocks. Setup: README.md.
+# A merge to master tests the site, builds and pushes the image to GHCR (tagged with the commit SHA),
+# then pins it in the GitOps repository, where Argo CD deploys it. Pull requests only test and build.
+# Generated from my homelab app template: the CONFIG blocks are the only app-specific parts.
 name: release
 
 on:
@@ -54,7 +53,7 @@ jobs:
       matrix:
         # --- CONFIG: one entry per image, published as ghcr.io/pedroshaina/<name> ---
         image:
-          - {name: portfolio, context: ., file: Dockerfile, build-args: ""}
+          - { name: portfolio, context: ., file: Dockerfile, build-args: '' }
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1

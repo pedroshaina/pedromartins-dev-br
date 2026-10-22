@@ -2,6 +2,8 @@
   --color-bg: #060b1d;
   --color-magenta: #ff2a6d;
   --color-cyan: #05d9e8;
+  --color-magenta-glow: rgba(255, 42, 109, 0.6);
+  --color-cyan-glow: rgba(5, 217, 232, 0.6);
   --color-text: #9aa1ba;
   --color-emphasis: #e8eaf3;
   --color-heading: #ffffff;

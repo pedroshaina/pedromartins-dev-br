@@ -19,20 +19,18 @@ const sorted = [...posts].sort((a, b) => {
 ---
 
 <ul class="posts">
-  {
-    sorted.map((post, i) => (
-      <li class="post">
-        <div class="head">
-          {numbered && <span class="part">{s.post.part(i + 1)}</span>}
-          <a href={postHref(post)}>{post.entry.data.title}</a>
-        </div>
-        <time datetime={post.entry.data.pubDate.toISOString()}>
-          {formatDate(post.entry.data.pubDate, locale)}
-        </time>
-        <p>{post.entry.data.description}</p>
-      </li>
-    ))
-  }
+  {sorted.map((post, i) => (
+    <li class="post">
+      <div class="head">
+        {numbered && <span class="part">{s.post.part(i + 1)}</span>}
+        <a href={postHref(post)}>{post.entry.data.title}</a>
+      </div>
+      <time datetime={post.entry.data.pubDate.toISOString()}>
+        {formatDate(post.entry.data.pubDate, locale)}
+      </time>
+      <p>{post.entry.data.description}</p>
+    </li>
+  ))}
 </ul>
 
 <style>

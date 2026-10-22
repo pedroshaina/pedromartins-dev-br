@@ -1,0 +1,39 @@
+---
+interface Props {
+  as?: 'h1' | 'h2';
+  /** `center` puts a line on both sides; `start` only on the left. */
+  align?: 'center' | 'start';
+}
+
+const { as: Tag = 'h2', align = 'center' } = Astro.props;
+---
+
+<Tag class:list={['heading', align]}>
+  <slot />
+</Tag>
+
+<style>
+  .heading {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 30px;
+    line-height: 1.1;
+    margin: 0;
+  }
+
+  .center {
+    justify-content: center;
+    margin-bottom: 48px;
+  }
+
+  .heading::before,
+  .center::after {
+    content: '';
+    width: 22px;
+    height: 2px;
+    flex-shrink: 0;
+    background: var(--color-magenta);
+    box-shadow: 0 0 8px var(--color-magenta-glow);
+  }
+</style>

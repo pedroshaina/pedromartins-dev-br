@@ -65,7 +65,10 @@ let checked: Promise<void> | undefined;
 
 function checkOnce(): Promise<void> {
   checked ??= (async () => {
-    const [posts, projects] = await Promise.all([getCollection('posts'), getCollection('projects')]);
+    const [posts, projects] = await Promise.all([
+      getCollection('posts'),
+      getCollection('projects'),
+    ]);
     assertTranslations(
       posts,
       projects.map((p) => p.id),
@@ -120,7 +123,11 @@ export function postHref(post: Post): string {
 }
 
 /** No link for 0 posts, the post itself for 1, the project's filtered list for 2+. */
-export function projectBlogHref(project: Project, posts: Post[], locale: Locale): string | undefined {
+export function projectBlogHref(
+  project: Project,
+  posts: Post[],
+  locale: Locale,
+): string | undefined {
   const own = posts.filter((p) => p.locale === locale && p.entry.data.project === project.slug);
   if (own.length === 0) return undefined;
   if (own.length === 1) return postHref(own[0]);

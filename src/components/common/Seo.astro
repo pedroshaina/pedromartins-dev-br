@@ -1,6 +1,6 @@
 ---
 import { site } from '@/config/site';
-import { languageTag, locales, type Locale } from '@/i18n/locales';
+import { locales, ogLocale, type Locale } from '@/i18n/locales';
 
 interface Props {
   title: string;
@@ -13,8 +13,6 @@ interface Props {
 const { title, description, locale, type = 'website', publishedTime } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const image = new URL('/og-default.png', Astro.site).href;
-// Open Graph wants underscores and a region: en_US, pt_BR.
-const ogLocale = (l: Locale) => (l === 'en' ? 'en_US' : languageTag[l].replace('-', '_'));
 ---
 
 <link rel="canonical" href={canonical} />
@@ -23,12 +21,12 @@ const ogLocale = (l: Locale) => (l === 'en' ? 'en_US' : languageTag[l].replace('
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />
-<meta property="og:locale" content={ogLocale(locale)} />
-{
-  locales
-    .filter((l) => l !== locale)
-    .map((l) => <meta property="og:locale:alternate" content={ogLocale(l)} />)
-}
+<meta property="og:locale" content={ogLocale[locale]} />
+{locales
+  .filter((l) => l !== locale)
+  .map((l) => (
+    <meta property="og:locale:alternate" content={ogLocale[l]} />
+  ))}
 <meta property="og:image" content={image} />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />

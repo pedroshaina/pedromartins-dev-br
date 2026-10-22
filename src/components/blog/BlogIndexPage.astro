@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PostList from './PostList.astro';
+import Heading from '@/components/common/Heading.astro';
 import { site } from '@/config/site';
 import { localizedPath, type Locale } from '@/i18n/locales';
 import { t } from '@/i18n/ui';
@@ -22,19 +23,24 @@ const description = project ? s.blog.projectDescription(project.title) : s.blog.
 <BaseLayout title={`${heading} · ${site.name}`} description={description} locale={locale}>
   <section class="page">
     <div class="side">
-      <h1>{heading}</h1>
-      {
-        project && (
-          <>
-            <p class="lede">{description}</p>
-            <p class="lede">
-              <a href={localizedPath('/blog/', locale)}>{s.home.allPosts}</a>
-            </p>
-          </>
-        )
-      }
+      <Heading as="h1" align="start">
+        {heading}
+      </Heading>
+      {project && (
+        <>
+          <p class="lede">{description}</p>
+          <p class="lede">
+            <a href={localizedPath('/blog/', locale)}>{s.home.allPosts}</a>
+          </p>
+        </>
+      )}
     </div>
-    <PostList posts={posts} locale={locale} order={project ? 'oldest' : 'newest'} numbered={!!project} />
+    <PostList
+      posts={posts}
+      locale={locale}
+      order={project ? 'oldest' : 'newest'}
+      numbered={!!project}
+    />
   </section>
 </BaseLayout>
 
@@ -57,22 +63,8 @@ const description = project ? s.blog.projectDescription(project.title) : s.blog.
     }
   }
 
-  h1 {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    font-size: 30px;
-    line-height: 1.1;
-    margin: -4px 0 0;
-  }
-
-  h1::before {
-    content: '';
-    width: 22px;
-    height: 2px;
-    flex-shrink: 0;
-    background: var(--color-magenta);
-    box-shadow: 0 0 8px rgba(255, 42, 109, 0.6);
+  .side {
+    margin-top: -4px;
   }
 
   .lede {
@@ -89,6 +81,6 @@ const description = project ? s.blog.projectDescription(project.title) : s.blog.
   .lede a {
     color: var(--color-emphasis);
     text-decoration: none;
-    border-bottom: 1px solid rgba(255, 42, 109, 0.6);
+    border-bottom: 1px solid var(--color-magenta-glow);
   }
 </style>

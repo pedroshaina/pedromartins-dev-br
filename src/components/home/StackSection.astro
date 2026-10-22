@@ -1,5 +1,5 @@
 ---
-import SectionTitle from './SectionTitle.astro';
+import Screen from './Screen.astro';
 import { stack } from '@/config/stack';
 import type { Locale } from '@/i18n/locales';
 import { t } from '@/i18n/ui';
@@ -12,38 +12,18 @@ const { locale } = Astro.props;
 const s = t(locale);
 ---
 
-<section id="stack" class="screen">
-  <div class="col">
-    <SectionTitle>{s.home.stackLabel}</SectionTitle>
-    <dl class="grid">
-      {
-        stack.map((category) => (
-          <div>
-            <dt>{category.label[locale]}</dt>
-            <dd>{category.items.join(', ')}</dd>
-          </div>
-        ))
-      }
-    </dl>
-  </div>
-</section>
+<Screen id="stack" title={s.home.stackLabel} width={640}>
+  <dl class="grid">
+    {stack.map((category) => (
+      <div>
+        <dt>{category.label[locale]}</dt>
+        <dd>{category.items.join(', ')}</dd>
+      </div>
+    ))}
+  </dl>
+</Screen>
 
 <style>
-  .screen {
-    min-height: 100svh;
-    display: flex;
-    align-items: center;
-    padding: 64px 16px;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-  }
-
-  .col {
-    width: 100%;
-    max-width: 640px;
-    margin: 0 auto;
-  }
-
   .grid {
     display: grid;
     gap: 28px 32px;

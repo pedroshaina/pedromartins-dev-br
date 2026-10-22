@@ -1,5 +1,5 @@
 ---
-import SectionTitle from './SectionTitle.astro';
+import Screen from './Screen.astro';
 import type { Locale } from '@/i18n/locales';
 import { t } from '@/i18n/ui';
 import { projectBlogHref, type Post, type Project } from '@/lib/content';
@@ -14,82 +14,51 @@ const { locale, projects, posts } = Astro.props;
 const s = t(locale);
 ---
 
-<section id="projects" class="screen">
-  <div class="col">
-    <div class="heading"><SectionTitle>{s.home.projectsLabel}</SectionTitle></div>
-    <ul class="projects">
-      {
-        projects.map((project) => {
-          const blogHref = projectBlogHref(project, posts, locale);
-          return (
-            <li class="project">
-              <div class="head">
-                <h3>{project.title}</h3>
-                {project.repo && (
-                  <a class="ext" href={project.repo} target="_blank" rel="noopener">
-                    {s.project.github}
-                  </a>
-                )}
-                {project.website && (
-                  <a class="ext" href={project.website} target="_blank" rel="noopener">
-                    {s.project.website}
-                  </a>
-                )}
-              </div>
-              <p>{project.summary}</p>
-              {blogHref && (
-                <a class="blog" href={blogHref}>
-                  {s.project.readOnBlog}
-                </a>
-              )}
-            </li>
-          );
-        })
-      }
-    </ul>
-  </div>
-</section>
+<Screen id="projects" title={s.home.projectsLabel} width={860}>
+  <ul class="projects">
+    {projects.map((project) => {
+      const blogHref = projectBlogHref(project, posts, locale);
+      return (
+        <li class="project">
+          <div class="head">
+            <h3>{project.title}</h3>
+            {project.repo && (
+              <a class="ext" href={project.repo} target="_blank" rel="noopener">
+                {s.project.github}
+              </a>
+            )}
+            {project.website && (
+              <a class="ext" href={project.website} target="_blank" rel="noopener">
+                {s.project.website}
+              </a>
+            )}
+          </div>
+          <p>{project.summary}</p>
+          {blogHref && (
+            <a class="blog" href={blogHref}>
+              {s.project.readOnBlog}
+            </a>
+          )}
+        </li>
+      );
+    })}
+  </ul>
+</Screen>
 
 <style>
-  .screen {
-    min-height: 100svh;
-    display: flex;
-    align-items: center;
-    padding: 64px 16px;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-  }
-
-  /* On phones the list is left-aligned edge to edge, so it needs more room than the centred screens. */
-  @media (max-width: 719px) {
-    .screen {
-      padding-left: 32px;
-      padding-right: 32px;
-    }
-  }
-
-  /* The last screen shares the window with the footer, which is where it snaps. */
-  .screen:last-child {
-    min-height: calc(100svh - var(--footer-height));
-    scroll-snap-align: none;
-  }
-
-  .col {
-    width: 100%;
-    max-width: 860px;
-    margin: 0 auto;
-  }
-
-  .heading {
-    margin-bottom: 16px;
-  }
-
   .projects {
     display: grid;
     gap: 36px 56px;
     list-style: none;
     margin: 0;
     padding: 0;
+  }
+
+  /* On phones the list is left-aligned edge to edge, so it needs more room than the centred screens. */
+  @media (max-width: 719px) {
+    .projects {
+      padding: 0 16px;
+    }
   }
 
   @media (min-width: 720px) {

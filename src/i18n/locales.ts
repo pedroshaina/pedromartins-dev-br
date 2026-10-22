@@ -12,6 +12,12 @@ export const languageTag: Record<Locale, string> = {
   'pt-br': 'pt-BR',
 };
 
+/** Open Graph wants underscores and a region. */
+export const ogLocale: Record<Locale, string> = {
+  en: 'en_US',
+  'pt-br': 'pt_BR',
+};
+
 export const switchLabel: Record<Locale, string> = {
   en: 'EN',
   'pt-br': 'PT',
