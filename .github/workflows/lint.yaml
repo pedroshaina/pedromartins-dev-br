@@ -1,4 +1,4 @@
-# homelab-apps-ci-cd-template lint v1: actionlint (+ shellcheck on run: blocks) for every workflow.
+# actionlint (with shellcheck on run: blocks) for the workflows, Prettier for everything else.
 name: lint
 
 on:
@@ -21,3 +21,15 @@ jobs:
           echo "8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8  $f" | sha256sum -c -
           tar xzf "$f" actionlint && sudo install -m 0755 actionlint /usr/local/bin/
       - run: actionlint
+
+  prettier:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm format:check

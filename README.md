@@ -56,15 +56,16 @@ Requires Node 24 and pnpm (`corepack enable` picks up the version pinned in `pac
 pnpm install
 pnpm dev       # http://localhost:4321
 pnpm check     # types and content schemas
+pnpm format    # Prettier; CI runs format:check
 pnpm build     # static site in dist/
 pnpm preview   # serve dist/
 ```
 
 ## Deployment
 
-Pull requests run type checks, the build, an offline link check and the image build. A merge to
-`master` pushes the image to GHCR and pins its digest in my GitOps repository, and Argo CD rolls it
-out on the cluster.
+Pull requests run type checks, a formatting check, the build, an offline link check and the image
+build. A merge to `master` pushes the image to GHCR and pins its digest in my GitOps repository,
+and Argo CD rolls it out on the cluster.
 
 ## License
 
