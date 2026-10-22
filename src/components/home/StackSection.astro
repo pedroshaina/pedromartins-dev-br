@@ -14,14 +14,12 @@ const s = t(locale);
 
 <Screen id="stack" title={s.home.stackLabel} width={640}>
   <dl class="grid">
-    {
-      stack.map((category) => (
-        <div>
-          <dt>{category.label[locale]}</dt>
-          <dd>{category.items.join(', ')}</dd>
-        </div>
-      ))
-    }
+    {stack.map((category) => (
+      <div>
+        <dt>{category.label[locale]}</dt>
+        <dd>{category.items.join(', ')}</dd>
+      </div>
+    ))}
   </dl>
 </Screen>
 

@@ -57,7 +57,10 @@ samp {
 
 /* Links and project titles light up on hover/focus; `body a` outranks components' scoped `a`. */
 a {
-  transition: color 0.2s, text-shadow 0.2s, border-color 0.2s;
+  transition:
+    color 0.2s,
+    text-shadow 0.2s,
+    border-color 0.2s;
 }
 
 body a:hover,

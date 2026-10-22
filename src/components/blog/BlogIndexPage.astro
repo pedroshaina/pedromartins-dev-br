@@ -23,19 +23,24 @@ const description = project ? s.blog.projectDescription(project.title) : s.blog.
 <BaseLayout title={`${heading} · ${site.name}`} description={description} locale={locale}>
   <section class="page">
     <div class="side">
-      <Heading as="h1" align="start">{heading}</Heading>
-      {
-        project && (
-          <>
-            <p class="lede">{description}</p>
-            <p class="lede">
-              <a href={localizedPath('/blog/', locale)}>{s.home.allPosts}</a>
-            </p>
-          </>
-        )
-      }
+      <Heading as="h1" align="start">
+        {heading}
+      </Heading>
+      {project && (
+        <>
+          <p class="lede">{description}</p>
+          <p class="lede">
+            <a href={localizedPath('/blog/', locale)}>{s.home.allPosts}</a>
+          </p>
+        </>
+      )}
     </div>
-    <PostList posts={posts} locale={locale} order={project ? 'oldest' : 'newest'} numbered={!!project} />
+    <PostList
+      posts={posts}
+      locale={locale}
+      order={project ? 'oldest' : 'newest'}
+      numbered={!!project}
+    />
   </section>
 </BaseLayout>
 

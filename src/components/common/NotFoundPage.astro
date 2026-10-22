@@ -11,7 +11,10 @@ interface Props {
 const { locale } = Astro.props;
 const s = t(locale);
 // A 404 answers any address, so its language switch goes to the other language's 404 page.
-const switchPaths = Object.fromEntries(locales.map((l) => [l, notFoundPath(l)])) as Record<Locale, string>;
+const switchPaths = Object.fromEntries(locales.map((l) => [l, notFoundPath(l)])) as Record<
+  Locale,
+  string
+>;
 ---
 
 <BaseLayout

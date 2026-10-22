@@ -16,34 +16,32 @@ const s = t(locale);
 
 <Screen id="projects" title={s.home.projectsLabel} width={860}>
   <ul class="projects">
-    {
-      projects.map((project) => {
-        const blogHref = projectBlogHref(project, posts, locale);
-        return (
-          <li class="project">
-            <div class="head">
-              <h3>{project.title}</h3>
-              {project.repo && (
-                <a class="ext" href={project.repo} target="_blank" rel="noopener">
-                  {s.project.github}
-                </a>
-              )}
-              {project.website && (
-                <a class="ext" href={project.website} target="_blank" rel="noopener">
-                  {s.project.website}
-                </a>
-              )}
-            </div>
-            <p>{project.summary}</p>
-            {blogHref && (
-              <a class="blog" href={blogHref}>
-                {s.project.readOnBlog}
+    {projects.map((project) => {
+      const blogHref = projectBlogHref(project, posts, locale);
+      return (
+        <li class="project">
+          <div class="head">
+            <h3>{project.title}</h3>
+            {project.repo && (
+              <a class="ext" href={project.repo} target="_blank" rel="noopener">
+                {s.project.github}
               </a>
             )}
-          </li>
-        );
-      })
-    }
+            {project.website && (
+              <a class="ext" href={project.website} target="_blank" rel="noopener">
+                {s.project.website}
+              </a>
+            )}
+          </div>
+          <p>{project.summary}</p>
+          {blogHref && (
+            <a class="blog" href={blogHref}>
+              {s.project.readOnBlog}
+            </a>
+          )}
+        </li>
+      );
+    })}
   </ul>
 </Screen>
 

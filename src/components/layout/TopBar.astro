@@ -15,28 +15,38 @@ const path = Astro.url.pathname;
 const blogPath = localizedPath('/blog/', locale);
 // No link until there's a post to read (drafts count in dev), nor inside the blog itself.
 const showBlog = (await getPosts(locale)).length > 0 && !path.startsWith(blogPath);
-const switchItems = locales.map((l) => ({ locale: l, label: switchLabel[l], lang: languageTag[l] }));
+const switchItems = locales.map((l) => ({
+  locale: l,
+  label: switchLabel[l],
+  lang: languageTag[l],
+}));
 ---
 
 <header class="top">
-  <a class="brand" href={localizedPath('/', locale)}>{site.initials}</a>
+  <a class="brand" href={localizedPath('/', locale)}>
+    {site.initials}
+  </a>
   <nav aria-label="Site">
     {showBlog && <a href={blogPath}>{s.nav.blog}</a>}
     <span class="lang" role="group" aria-label={s.nav.language}>
-      {
-        switchItems.map((item, i) => (
-          <>
-            {i > 0 && <span aria-hidden="true"> | </span>}
-            {item.locale === locale ? (
-              <span class="current" aria-current="true">{item.label}</span>
-            ) : (
-              <a href={switchPaths?.[item.locale] ?? localizedPath(path, item.locale)} hreflang={item.lang} lang={item.lang}>
-                {item.label}
-              </a>
-            )}
-          </>
-        ))
-      }
+      {switchItems.map((item, i) => (
+        <>
+          {i > 0 && <span aria-hidden="true"> | </span>}
+          {item.locale === locale ? (
+            <span class="current" aria-current="true">
+              {item.label}
+            </span>
+          ) : (
+            <a
+              href={switchPaths?.[item.locale] ?? localizedPath(path, item.locale)}
+              hreflang={item.lang}
+              lang={item.lang}
+            >
+              {item.label}
+            </a>
+          )}
+        </>
+      ))}
     </span>
   </nav>
 </header>

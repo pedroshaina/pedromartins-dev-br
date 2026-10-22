@@ -8,7 +8,10 @@ import { getPosts, getProjects, type Project } from '@/lib/content';
 export const getStaticPaths = (async () => {
   const paths = await Promise.all(
     localePaths().map(async ({ params, props }) => {
-      const [posts, projects] = await Promise.all([getPosts(props.locale), getProjects(props.locale)]);
+      const [posts, projects] = await Promise.all([
+        getPosts(props.locale),
+        getProjects(props.locale),
+      ]);
       return projects
         .filter((project) => posts.filter((p) => p.entry.data.project === project.slug).length >= 2)
         .map((project) => ({

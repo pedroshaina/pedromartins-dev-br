@@ -16,15 +16,30 @@ const s = t(Astro.props.locale);
     <Avatar size={132} />
     <h1>{site.name}</h1>
     <div class="text">
-      {s.home.intro.map((paragraph) => <p>{paragraph}</p>)}
+      {s.home.intro.map((paragraph) => (
+        <p>{paragraph}</p>
+      ))}
     </div>
     <ul class="links">
-      <li><a href={site.links.github} target="_blank">GitHub</a></li>
-      <li><a href={site.links.linkedin} target="_blank">LinkedIn</a></li>
-      <li><a href={site.links.email}>Email</a></li>
+      <li>
+        <a href={site.links.github} target="_blank">
+          GitHub
+        </a>
+      </li>
+      <li>
+        <a href={site.links.linkedin} target="_blank">
+          LinkedIn
+        </a>
+      </li>
+      <li>
+        <a href={site.links.email}>Email</a>
+      </li>
     </ul>
   </div>
-  <a class="hint" href="#stack">{s.home.scrollHint}<span aria-hidden="true">↓</span></a>
+  <a class="hint" href="#stack">
+    {s.home.scrollHint}
+    <span aria-hidden="true">↓</span>
+  </a>
 </section>
 
 <style>
@@ -107,7 +122,9 @@ const s = t(Astro.props.locale);
     line-height: 1;
     color: var(--color-magenta);
     text-shadow: 0 0 8px var(--color-magenta-glow);
-    transition: color 0.2s, text-shadow 0.2s;
+    transition:
+      color 0.2s,
+      text-shadow 0.2s;
   }
 
   .hint:hover,

@@ -61,7 +61,8 @@ const xDefault = new URL(localizedPath(Astro.url.pathname, defaultLocale), Astro
       href={localizedPath('/rss.xml', locale)}
     />
     {noindex && <meta name="robots" content="noindex" />}
-    {!noindex && alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
+    {!noindex &&
+      alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
     {!noindex && <link rel="alternate" hreflang="x-default" href={xDefault} />}
   </head>
   <body>

@@ -48,7 +48,7 @@ export const ui: Record<Locale, UiStrings> = {
       intro: [
         'Senior software engineer, 12+ years across different industries',
         'Experienced in different languages and technologies, I build systems end-to-end that keep working when things go wrong.',
-        'Bitcoin enthusiast & Coffee drinker'
+        'Bitcoin enthusiast & Coffee drinker',
       ],
       stackLabel: 'Stack',
       projectsLabel: 'Projects',
@@ -85,7 +85,7 @@ export const ui: Record<Locale, UiStrings> = {
       intro: [
         'Engenheiro de software sênior com mais de 12 anos de experiência em diferentes indústrias',
         'Atuando em várias linguagens diferentes, eu construo soluções completas que continuam funcionando quando algo dá errado.',
-        'Entusiasta em Bitcoin e apreciador de Café.'
+        'Entusiasta em Bitcoin e apreciador de Café.',
       ],
       stackLabel: 'Tecnologias',
       projectsLabel: 'Projetos',

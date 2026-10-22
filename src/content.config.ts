@@ -22,13 +22,15 @@ const localized = z.object({
 
 const projects = defineCollection({
   loader: glob({ pattern: '*.yaml', base: './src/content/projects' }),
-  schema: z.object({
-    order: z.number(),
-    repo: z.url().optional(),
-    website: z.url().optional(),
-  }).extend(
-    Object.fromEntries(locales.map((l) => [l, localized])) as Record<Locale, typeof localized>,
-  ),
+  schema: z
+    .object({
+      order: z.number(),
+      repo: z.url().optional(),
+      website: z.url().optional(),
+    })
+    .extend(
+      Object.fromEntries(locales.map((l) => [l, localized])) as Record<Locale, typeof localized>,
+    ),
 });
 
 export const collections = { posts, projects };

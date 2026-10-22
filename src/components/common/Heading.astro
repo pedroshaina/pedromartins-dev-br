@@ -8,7 +8,9 @@ interface Props {
 const { as: Tag = 'h2', align = 'center' } = Astro.props;
 ---
 
-<Tag class:list={['heading', align]}><slot /></Tag>
+<Tag class:list={['heading', align]}>
+  <slot />
+</Tag>
 
 <style>
   .heading {

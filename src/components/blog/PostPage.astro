@@ -57,42 +57,36 @@ if (series) {
     <p class="meta">
       <time datetime={data.pubDate.toISOString()}>{formatDate(data.pubDate, locale)}</time>
       {' · '}
-      {readingTime(post.entry.body ?? '')}
-      {' '}
-      {s.post.minRead}
+      {readingTime(post.entry.body ?? '')} {s.post.minRead}
     </p>
     <h1>{data.title}</h1>
-    {
-      series && project && (
-        <p class="from">
-          <a href={seriesHref}>{s.post.partOf(series.index, series.total, project.title)}</a>
-        </p>
-      )
-    }
+    {series && project && (
+      <p class="from">
+        <a href={seriesHref}>{s.post.partOf(series.index, series.total, project.title)}</a>
+      </p>
+    )}
     <div class="prose">
       <Content />
     </div>
     <nav class="next" aria-label={s.nav.blog}>
       <div>
-        {
-          prev && (
-            <a href={postHref(prev)}>
-              <span>← {s.post.previous}</span>
-              <b>{prev.entry.data.title}</b>
-            </a>
-          )
-        }
+        {prev && (
+          <a href={postHref(prev)}>
+            <span>← {s.post.previous}</span>
+            <b>{prev.entry.data.title}</b>
+          </a>
+        )}
       </div>
       <div class="right">
-        {
-          next && (
-            <a href={postHref(next)}>
-              <span>{s.post.next} →</span>
-              <b>{next.entry.data.title}</b>
-            </a>
-          )
-        }
-        <a class="all" href={localizedPath('/blog/', locale)}>{s.home.allPosts}</a>
+        {next && (
+          <a href={postHref(next)}>
+            <span>{s.post.next} →</span>
+            <b>{next.entry.data.title}</b>
+          </a>
+        )}
+        <a class="all" href={localizedPath('/blog/', locale)}>
+          {s.home.allPosts}
+        </a>
       </div>
     </nav>
   </article>
