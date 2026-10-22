@@ -1,4 +1,10 @@
+<div align="center">
+
+<img src="src/assets/avatar.svg" width="120" alt="Pixel-art avatar of Pedro Shainã Martins">
+
 # pedromartins.dev.br
+
+</div>
 
 My personal site, live at [pedromartins.dev.br](https://pedromartins.dev.br): a portfolio and blog
 in English and Brazilian Portuguese.
