@@ -3,9 +3,10 @@
 My personal site, live at [pedromartins.dev.br](https://pedromartins.dev.br): a portfolio and blog
 in English and Brazilian Portuguese.
 
-It's a static site with no client-side framework and no backend. [Astro](https://astro.build) renders
-Markdown and YAML into plain HTML, styled with plain CSS, and nginx serves the result from a container
-on my [Kubernetes homelab](https://github.com/pedroshaina/k8s-homelab).
+Built with [Astro](https://astro.build). I chose Astro because it's made for content-first static
+sites: pages ship as plain HTML with no JavaScript unless they need it, so they load fast, and good
+SEO comes by default. nginx serves the result from a container on my
+[Kubernetes homelab](https://github.com/pedroshaina/k8s-homelab).
 
 ## Stack
 
