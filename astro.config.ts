@@ -1,4 +1,3 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import { defaultLocale, languageTag, locales } from './src/i18n/locales';
@@ -25,7 +24,7 @@ export default defineConfig({
     }),
   ],
   markdown: {
-    // @ts-expect-error the JSON import is a valid TextMate theme; its literal types are just wider
-    shikiConfig: { theme: night },
+    // JSON imports widen "type": "dark" to string, which Shiki's theme type rejects.
+    shikiConfig: { theme: { ...night, type: 'dark' } },
   },
 });
