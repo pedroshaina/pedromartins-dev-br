@@ -1,7 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
-import { locales, type Locale } from './i18n/locales';
+import { locales, type Locale } from '@/i18n/locales';
 
 const posts = defineCollection({
   loader: glob({ pattern: `**/{${locales.join(',')}}.md`, base: './src/content/posts' }),
