@@ -1,4 +1,4 @@
-import type { Locale } from '../i18n/locales';
+import type { Locale } from '@/i18n/locales';
 
 export type StackCategory = {
   label: Record<Locale, string>;

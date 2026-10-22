@@ -1,7 +1,7 @@
 ---
 import type { GetStaticPaths } from 'astro';
-import HomePage from '../../components/home/HomePage.astro';
-import { localePaths, type Locale } from '../../i18n/locales';
+import HomePage from '@/components/home/HomePage.astro';
+import { localePaths, type Locale } from '@/i18n/locales';
 
 export const getStaticPaths = (() => localePaths()) satisfies GetStaticPaths;
 

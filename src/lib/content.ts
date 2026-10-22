@@ -1,5 +1,5 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
-import { locales, localizedPath, type Locale } from '../i18n/locales';
+import { locales, localizedPath, type Locale } from '@/i18n/locales';
 
 export type Post = { slug: string; locale: Locale; entry: CollectionEntry<'posts'> };
 

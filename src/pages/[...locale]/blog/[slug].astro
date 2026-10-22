@@ -1,8 +1,8 @@
 ---
 import type { GetStaticPaths } from 'astro';
-import PostPage from '../../../components/blog/PostPage.astro';
-import { localePaths, type Locale } from '../../../i18n/locales';
-import { getPosts, type Post } from '../../../lib/content';
+import PostPage from '@/components/blog/PostPage.astro';
+import { localePaths, type Locale } from '@/i18n/locales';
+import { getPosts, type Post } from '@/lib/content';
 
 export const getStaticPaths = (async () => {
   const paths = await Promise.all(

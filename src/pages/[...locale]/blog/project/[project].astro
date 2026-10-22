@@ -1,8 +1,8 @@
 ---
 import type { GetStaticPaths } from 'astro';
-import BlogIndexPage from '../../../../components/blog/BlogIndexPage.astro';
-import { localePaths, type Locale } from '../../../../i18n/locales';
-import { getPosts, getProjects, type Project } from '../../../../lib/content';
+import BlogIndexPage from '@/components/blog/BlogIndexPage.astro';
+import { localePaths, type Locale } from '@/i18n/locales';
+import { getPosts, getProjects, type Project } from '@/lib/content';
 
 // Only projects with 2+ posts get a list; with one, the home page links straight to the post.
 export const getStaticPaths = (async () => {
