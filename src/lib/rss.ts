@@ -1,10 +1,9 @@
 import rss from '@astrojs/rss';
 import type { APIContext } from 'astro';
-import { languageTag, localizedPath, type Locale } from '../i18n/locales';
-import { t } from '../i18n/ui';
+import { languageTag, localizedPath, type Locale } from '@/i18n/locales';
+import { t } from '@/i18n/ui';
 import { getPosts, postHref } from './content';
 
-/** One feed per language, from the same published posts the blog lists. */
 export async function feed(context: APIContext, locale: Locale): Promise<Response> {
   const s = t(locale);
   const posts = await getPosts(locale);

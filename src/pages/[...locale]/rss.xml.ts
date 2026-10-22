@@ -1,6 +1,6 @@
 import type { APIContext, GetStaticPaths } from 'astro';
-import { localePaths, type Locale } from '../../i18n/locales';
-import { feed } from '../../lib/rss';
+import { localePaths, type Locale } from '@/i18n/locales';
+import { feed } from '@/lib/rss';
 
 export const getStaticPaths = (() => localePaths()) satisfies GetStaticPaths;
 

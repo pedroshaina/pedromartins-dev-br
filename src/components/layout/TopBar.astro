@@ -1,8 +1,8 @@
 ---
-import { site } from '../../config/site';
-import { languageTag, localizedPath, locales, switchLabel, type Locale } from '../../i18n/locales';
-import { t } from '../../i18n/ui';
-import { getPosts } from '../../lib/content';
+import { site } from '@/config/site';
+import { languageTag, localizedPath, locales, switchLabel, type Locale } from '@/i18n/locales';
+import { t } from '@/i18n/ui';
+import { getPosts } from '@/lib/content';
 
 interface Props {
   locale: Locale;
@@ -72,7 +72,6 @@ const switchItems = locales.map((l) => ({ locale: l, label: switchLabel[l], lang
     align-items: center;
   }
 
-  /* The selected language: bright, with the site's magenta line under it; the other one recedes. */
   .lang a {
     color: var(--color-dim);
   }

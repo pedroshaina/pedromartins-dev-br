@@ -8,7 +8,6 @@ export type UiStrings = {
   };
   home: {
     description: string;
-    /** One string per paragraph. */
     intro: string[];
     stackLabel: string;
     projectsLabel: string;
@@ -26,7 +25,6 @@ export type UiStrings = {
   };
   post: {
     partOf: (n: number, m: number, project: string) => string;
-    /** A post's place in its project's list. */
     part: (n: number) => string;
     minRead: string;
     previous: string;
@@ -47,7 +45,6 @@ export const ui: Record<Locale, UiStrings> = {
     nav: { blog: 'Blog', language: 'Language' },
     home: {
       description: 'Pedro Shainã Martins, senior software engineer: projects and writing.',
-      // TODO(Pedro): the real intro sentence.
       intro: [
         'Senior software engineer, 12+ years across different industries',
         'Experienced in different languages and technologies, I build systems end-to-end that keep working when things go wrong.',
@@ -85,7 +82,6 @@ export const ui: Record<Locale, UiStrings> = {
     nav: { blog: 'Blog', language: 'Idioma' },
     home: {
       description: 'Pedro Shainã Martins, engenheiro de software sênior: projetos e blog.',
-      // TODO(Pedro): a frase de apresentação de verdade.
       intro: [
         'Engenheiro de software sênior com mais de 12 anos de experiência em diferentes indústrias',
         'Atuando em várias linguagens diferentes, eu construo soluções completas que continuam funcionando quando algo dá errado.',

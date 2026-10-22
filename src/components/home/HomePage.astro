@@ -1,12 +1,12 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
 import IntroScreen from './IntroScreen.astro';
 import StackSection from './StackSection.astro';
 import ProjectsSection from './ProjectsSection.astro';
-import { site } from '../../config/site';
-import type { Locale } from '../../i18n/locales';
-import { t } from '../../i18n/ui';
-import { getPosts, getProjects } from '../../lib/content';
+import { site } from '@/config/site';
+import type { Locale } from '@/i18n/locales';
+import { t } from '@/i18n/ui';
+import { getPosts, getProjects } from '@/lib/content';
 
 interface Props {
   locale: Locale;
