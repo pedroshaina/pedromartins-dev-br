@@ -1,0 +1,11 @@
+order: 4
+repo: https://github.com/pedroshaina/pedromartins-dev-br
+en:
+  title: pedromartins.dev.br
+  summary: >-
+    This website: a portfolio and blog in English and Brazilian Portuguese, built with Astro as
+    plain static pages and served by nginx from my k8s homelab.
+pt-br:
+  title: pedromartins.dev.br
+  summary: >-
+    Este website: um portfólio e blog em inglês e português, feito com Astro e servido via nginx a partir do meu homelab.
