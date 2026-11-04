@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 470" role="img" aria-labelledby="t">
+  <title id="t">As camadas do homelab: o OpenTofu declara uma VM com Talos e um container de DNS no Proxmox VE, que roda no mini PC</title>
+  <style>
+    text { font-family: 'IBM Plex Sans', system-ui, sans-serif; fill: #9aa1ba; font-size: 15px; }
+    .h { fill: #ffffff; font-weight: 600; font-size: 17px; }
+    .m { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; }
+    .c { fill: #05d9e8; }
+    .g { fill: #ff2a6d; }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10z" fill="#ff2a6d"/>
+    </marker>
+  </defs>
+  <rect width="720" height="470" rx="8" fill="#0a1128"/>
+
+  <!-- OpenTofu -->
+  <rect x="40" y="20" width="640" height="56" rx="6" fill="none" stroke="#ff2a6d" stroke-width="1.5"/>
+  <text x="60" y="44" class="h g">OpenTofu</text>
+  <text x="60" y="64">declara a VM, a configuração do Talos e o container de DNS</text>
+  <path d="M265 76v68" stroke="#ff2a6d" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+  <path d="M575 76v68" stroke="#ff2a6d" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+
+  <!-- Hardware -->
+  <rect x="20" y="96" width="680" height="354" rx="6" fill="none" stroke="#70789a" stroke-width="1.5"/>
+  <text x="40" y="430" class="m">mini PC · Ryzen 7 5800H (8C/16T) · 32 GB DDR4 · 1 TB NVMe</text>
+
+  <!-- Proxmox -->
+  <rect x="40" y="108" width="640" height="296" rx="6" fill="none" stroke="#05d9e8" stroke-width="1.5"/>
+  <text x="60" y="134" class="h c">Proxmox VE</text>
+
+  <!-- Talos VM -->
+  <rect x="60" y="150" width="410" height="234" rx="6" fill="none" stroke="#ff2a6d" stroke-width="1.5"/>
+  <text x="80" y="176" class="h">VM talos-cp-01 · Talos Linux</text>
+  <text x="80" y="198" class="m">8 vCPU · 20 GB RAM · disco de 100 GB</text>
+  <rect x="80" y="216" width="370" height="148" rx="6" fill="none" stroke="#05d9e8" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <text x="100" y="246" class="h c">Kubernetes, node único</text>
+  <text x="100" y="274">control plane e workloads juntos</text>
+  <text x="100" y="302">Argo CD · serviços da plataforma</text>
+  <text x="100" y="330">minhas aplicações</text>
+
+  <!-- DNS container -->
+  <rect x="490" y="150" width="170" height="234" rx="6" fill="none" stroke="#70789a" stroke-width="1.5"/>
+  <text x="510" y="176" class="h">dns01</text>
+  <text x="510" y="200">container</text>
+  <text x="510" y="246">DNS interno</text>
+  <text x="510" y="270">da rede local</text>
+</svg>
