@@ -21,7 +21,7 @@
   <path d="M190 80v28" stroke="#05d9e8" stroke-width="1.5" marker-end="url(#a)"/>
 
   <rect x="40" y="112" width="300" height="44" rx="6" fill="none" stroke="#05d9e8" stroke-width="1.5"/>
-  <text x="60" y="140" class="m c">homelab-platform-gitops/apps/</text>
+  <text x="60" y="140" class="m c">platform-gitops/apps/</text>
   <text x="370" y="140">one Application per component,</text>
   <text x="370" y="162">Argo CD itself included</text>
 

@@ -31,7 +31,7 @@ metadata:
 spec:
   project: platform
   source:
-    repoURL: git@github.com:pedroshaina/homelab-platform-gitops.git
+    repoURL: git@github.com:your-github-user/platform-gitops.git
     targetRevision: main
     path: apps # one Application per component lives here
   destination:

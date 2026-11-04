@@ -9,7 +9,7 @@ draft: true
 ---
 
 In the [previous post](/blog/homelab-gitops-foundations/), Git took over the cluster. Three
-foundational pieces were still missing, all about reaching it: exposing services to the internet,
+foundational pieces were still missing, all about reaching it from the outside: exposing services to the internet,
 DNS and TLS. With those in place, I could finally deploy something real.
 
 ## Exposing services to the internet
@@ -37,9 +37,8 @@ Nothing is public by default. Each app opts in with one flag in the platform's a
 ```yaml
 teams:
   - name: apps
-    repo: git@github.com:pedroshaina/homelab-apps-gitops.git
+    repo: git@github.com:your-github-user/apps-gitops.git
     apps:
-      - { name: demo, public: true }
       - { name: yabe, public: true }
 ```
 
@@ -54,7 +53,7 @@ cluster (the `dns01` box from part 1). So there are actually two external-dns in
 
 ![Split DNS: external-dns writes every route to the internal DNS server, and only public apps to Cloudflare](./split-dns.svg)
 
-Grafana, the Argo CD UI and friends resolve only at home, and the internet only learns about the
+Grafana, the Argo CD UI and similar platform tools resolve only at home, and the internet only learns about the
 apps I flagged as public.
 
 ## TLS
@@ -89,14 +88,8 @@ spec:
   hostnames:
     - yabe.pdrlabs.com.br
   rules:
-    - matches:
-        - path: { type: PathPrefix, value: /api }
-      filters: # /api/v1/blocks → /v1/blocks, so yabe needs no base path
-        - type: URLRewrite
-          urlRewrite:
-            path: { type: ReplacePrefixMatch, replacePrefixMatch: / }
-      backendRefs:
-        - { name: yabe-api, port: 8080 }
+    - backendRefs:
+        - { name: yabe, port: 8080 }
 ```
 
 After that, I set up GitHub Actions to build the app's images on every merge to `main`, push them
