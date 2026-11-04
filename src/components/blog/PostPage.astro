@@ -28,11 +28,6 @@ const [posts, projects] = await Promise.all([getPosts(locale), getProjects(local
 
 const series = getSeries(post, posts);
 const project = projects.find((p) => p.slug === data.project);
-// A one-post series links back to the project on the home page instead of to itself.
-const seriesHref =
-  project && series && series.total > 1
-    ? projectBlogHref(project, posts, locale)
-    : `${localizedPath('/', locale)}#projects`;
 
 // Within the series when there is one; otherwise chronological (posts are newest first).
 let prev: Post | undefined;
@@ -54,6 +49,9 @@ if (series) {
   publishedTime={data.pubDate}
 >
   <article class="col">
+    <a class="back" href={localizedPath('/blog/', locale)}>
+      <span aria-hidden="true">←</span> {s.home.allPosts}
+    </a>
     <p class="meta">
       <time datetime={data.pubDate.toISOString()}>{formatDate(data.pubDate, locale)}</time>
       {' · '}
@@ -62,7 +60,8 @@ if (series) {
     <h1>{data.title}</h1>
     {series && project && (
       <p class="from">
-        <a href={seriesHref}>{s.post.partOf(series.index, series.total, project.title)}</a>
+        {s.post.partOf(series.index, series.total)}{' '}
+        <a href={projectBlogHref(project.slug, locale)}>{project.title}</a>
       </p>
     )}
     <div class="prose">
@@ -84,9 +83,6 @@ if (series) {
             <b>{next.entry.data.title}</b>
           </a>
         )}
-        <a class="all" href={localizedPath('/blog/', locale)}>
-          {s.home.allPosts}
-        </a>
       </div>
     </nav>
   </article>
@@ -97,6 +93,14 @@ if (series) {
     max-width: 680px;
     margin: 0 auto;
     padding: 48px 16px 64px;
+  }
+
+  .back {
+    display: inline-block;
+    margin-bottom: 24px;
+    font-size: 14px;
+    color: var(--color-heading);
+    text-decoration: none;
   }
 
   .meta {
@@ -121,9 +125,8 @@ if (series) {
   }
 
   .from a {
-    color: var(--color-text);
+    color: var(--color-magenta);
     text-decoration: none;
-    border-bottom: 1px solid var(--color-magenta-glow);
   }
 
   .next {
@@ -150,12 +153,5 @@ if (series) {
 
   .right {
     text-align: right;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .next .all {
-    color: var(--color-emphasis);
   }
 </style>

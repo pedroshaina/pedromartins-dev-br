@@ -1,8 +1,8 @@
 ---
 import Screen from './Screen.astro';
-import type { Locale } from '@/i18n/locales';
+import { localizedPath, type Locale } from '@/i18n/locales';
 import { t } from '@/i18n/ui';
-import { projectBlogHref, type Post, type Project } from '@/lib/content';
+import type { Post, Project } from '@/lib/content';
 
 interface Props {
   locale: Locale;
@@ -16,33 +16,30 @@ const s = t(locale);
 
 <Screen id="projects" title={s.home.projectsLabel} width={860}>
   <ul class="projects">
-    {projects.map((project) => {
-      const blogHref = projectBlogHref(project, posts, locale);
-      return (
-        <li class="project">
-          <div class="head">
-            <h3>{project.title}</h3>
-            {project.repo && (
-              <a class="ext" href={project.repo} target="_blank" rel="noopener">
-                {s.project.github}
-              </a>
-            )}
-            {project.website && (
-              <a class="ext" href={project.website} target="_blank" rel="noopener">
-                {s.project.website}
-              </a>
-            )}
-          </div>
-          <p>{project.summary}</p>
-          {blogHref && (
-            <a class="blog" href={blogHref}>
-              {s.project.readOnBlog}
+    {projects.map((project) => (
+      <li class="project">
+        <div class="head">
+          <h3>{project.title}</h3>
+          {project.repo && (
+            <a class="ext" href={project.repo} target="_blank" rel="noopener">
+              {s.project.github}
             </a>
           )}
-        </li>
-      );
-    })}
+          {project.website && (
+            <a class="ext" href={project.website} target="_blank" rel="noopener">
+              {s.project.website}
+            </a>
+          )}
+        </div>
+        <p>{project.summary}</p>
+      </li>
+    ))}
   </ul>
+  {posts.length > 0 && (
+    <a class="blog" href={localizedPath('/blog/', locale)}>
+      {s.project.readMoreOnBlog} <span aria-hidden="true">→</span>
+    </a>
+  )}
 </Screen>
 
 <style>
@@ -58,6 +55,10 @@ const s = t(locale);
   @media (max-width: 719px) {
     .projects {
       padding: 0 16px;
+    }
+
+    .blog {
+      margin-right: 16px;
     }
   }
 
@@ -94,13 +95,24 @@ const s = t(locale);
   }
 
   p {
-    margin: 0 0 10px;
+    margin: 0;
     line-height: 1.65;
   }
 
+  /* Right-aligned under the list; margin-right is left to the phone rule above. */
   .blog {
+    display: block;
+    width: fit-content;
+    margin-top: 32px;
+    margin-left: auto;
     font-size: 15px;
     color: var(--color-cyan);
     text-decoration: none;
+    text-underline-offset: 4px;
+  }
+
+  .blog:hover,
+  .blog:focus-visible {
+    text-decoration: underline;
   }
 </style>

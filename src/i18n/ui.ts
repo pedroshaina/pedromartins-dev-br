@@ -17,14 +17,14 @@ export type UiStrings = {
   project: {
     github: string;
     website: string;
-    readOnBlog: string;
+    readMoreOnBlog: string;
   };
   blog: {
     description: string;
     projectDescription: (project: string) => string;
   };
   post: {
-    partOf: (n: number, m: number, project: string) => string;
+    partOf: (n: number, m: number) => string;
     part: (n: number) => string;
     minRead: string;
     previous: string;
@@ -58,14 +58,14 @@ export const ui: Record<Locale, UiStrings> = {
     project: {
       github: 'GitHub ↗',
       website: 'Website ↗',
-      readOnBlog: 'Read about it on the blog',
+      readMoreOnBlog: 'Read more about the projects on the blog',
     },
     blog: {
       description: 'Posts by Pedro Shainã Martins on the projects he builds.',
       projectDescription: (project) => `Posts about ${project}, oldest first.`,
     },
     post: {
-      partOf: (n, m, project) => `Part ${n} of ${m} on ${project}`,
+      partOf: (n, m) => `Part ${n} of ${m} on`,
       part: (n) => `Part ${n}`,
       minRead: 'min',
       previous: 'Previous',
@@ -95,14 +95,14 @@ export const ui: Record<Locale, UiStrings> = {
     project: {
       github: 'GitHub ↗',
       website: 'Site ↗',
-      readOnBlog: 'Leia sobre no blog',
+      readMoreOnBlog: 'Leia mais sobre os projetos no blog',
     },
     blog: {
       description: 'Textos de Pedro Shainã Martins sobre os projetos que ele constrói.',
       projectDescription: (project) => `Posts sobre ${project}, do mais antigo ao mais recente.`,
     },
     post: {
-      partOf: (n, m, project) => `Parte ${n} de ${m} sobre ${project}`,
+      partOf: (n, m) => `Parte ${n} de ${m} sobre`,
       part: (n) => `Parte ${n}`,
       minRead: 'min',
       previous: 'Anterior',

@@ -122,16 +122,9 @@ export function postHref(post: Post): string {
   return localizedPath(`/blog/${post.slug}/`, post.locale);
 }
 
-/** No link for 0 posts, the post itself for 1, the project's filtered list for 2+. */
-export function projectBlogHref(
-  project: Project,
-  posts: Post[],
-  locale: Locale,
-): string | undefined {
-  const own = posts.filter((p) => p.locale === locale && p.entry.data.project === project.slug);
-  if (own.length === 0) return undefined;
-  if (own.length === 1) return postHref(own[0]);
-  return localizedPath(`/blog/project/${project.slug}/`, locale);
+/** A project's list of posts; it exists once the project has a post. */
+export function projectBlogHref(projectSlug: string, locale: Locale): string {
+  return localizedPath(`/blog/project/${projectSlug}/`, locale);
 }
 
 export function readingTime(body: string): number {
