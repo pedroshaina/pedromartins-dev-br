@@ -17,7 +17,7 @@ export type UiStrings = {
   project: {
     github: string;
     website: string;
-    readOnBlog: string;
+    readMoreOnBlog: string;
   };
   blog: {
     description: string;
@@ -58,7 +58,7 @@ export const ui: Record<Locale, UiStrings> = {
     project: {
       github: 'GitHub ↗',
       website: 'Website ↗',
-      readOnBlog: 'Read about it on the blog',
+      readMoreOnBlog: 'Read more about the projects on the blog',
     },
     blog: {
       description: 'Posts by Pedro Shainã Martins on the projects he builds.',
@@ -95,7 +95,7 @@ export const ui: Record<Locale, UiStrings> = {
     project: {
       github: 'GitHub ↗',
       website: 'Site ↗',
-      readOnBlog: 'Leia sobre no blog',
+      readMoreOnBlog: 'Leia mais sobre os projetos no blog',
     },
     blog: {
       description: 'Textos de Pedro Shainã Martins sobre os projetos que ele constrói.',
