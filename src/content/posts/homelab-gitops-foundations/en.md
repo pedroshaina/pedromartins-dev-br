@@ -3,7 +3,7 @@ title: Letting Git run the cluster
 description: >-
   Argo CD and the app-of-apps pattern, secrets from 1Password through External Secrets Operator,
   and the cluster's foundations: Cilium for networking and Proxmox CSI for storage.
-pubDate: 2026-11-10
+pubDate: 2026-11-02
 project: k8s-homelab
 draft: true
 ---
@@ -98,7 +98,7 @@ of:
 - DNS management
 - TLS handling
 
-The first two are below. The other three are all about reaching the cluster, so they get [their
+The first two are described below. The other three are all about reaching the cluster, so they get [their
 own post](/blog/homelab-going-live/).
 
 ### Networking: Cilium

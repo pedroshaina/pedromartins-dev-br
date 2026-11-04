@@ -3,7 +3,7 @@ title: From a mini PC to a Kubernetes cluster
 description: >-
   Why I built a homelab, the hardware it runs on, and the choices that took it from bare metal to a
   Talos Linux cluster: Proxmox VE, OpenTofu and a single node.
-pubDate: 2026-11-03
+pubDate: 2026-11-01
 project: k8s-homelab
 draft: true
 ---
@@ -110,8 +110,9 @@ resource "proxmox_virtual_environment_vm" "cp" {
 }
 ```
 
-The disk is imported from a Talos image that OpenTofu downloads itself, and the same code then
-applies the Talos configuration to the node. The VM and the OS on it are defined in one place.
+The VM boots from a Talos image that OpenTofu has Proxmox download, and the same code then sends
+the Talos configuration to the node and bootstraps Kubernetes. One `tofu apply` takes me from an
+empty Proxmox to a running cluster, with the VM and its OS defined side by side.
 
 That leaves 4 GB of RAM for Proxmox itself and a small container for internal DNS (more on that in
 part 3). If the node goes down, everything goes down with it. For a homelab, that's a trade-off

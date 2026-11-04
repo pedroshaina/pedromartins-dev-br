@@ -3,7 +3,7 @@ title: 'Going live: tunnels, DNS and a first app'
 description: >-
   Exposing a home cluster without opening ports using Cloudflare Tunnel, split DNS, TLS from
   cert-manager, deploying yabe through GitOps, and the observability stack that watches it.
-pubDate: 2026-11-17
+pubDate: 2026-11-03
 project: k8s-homelab
 draft: true
 ---

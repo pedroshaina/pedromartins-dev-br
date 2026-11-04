@@ -1,26 +1,25 @@
 ---
 title: Deixando o Git comandar o cluster
 description: >-
-  Argo CD e o padrão app-of-apps, secrets do 1Password via External Secrets Operator e as fundações
-  do cluster: Cilium para rede e Proxmox CSI para armazenamento.
-pubDate: 2026-11-10
+  Argo CD e o padrão app-of-apps, secrets do 1Password via External Secrets Operator e a base do
+  cluster: Cilium para rede e Proxmox CSI para armazenamento.
+pubDate: 2026-11-02
 project: k8s-homelab
 draft: true
 ---
 
-No [primeiro post](/pt-br/blog/homelab-mini-pc-to-kubernetes/), eu fui de um mini PC até um cluster
-Kubernetes vazio. Agora era hora de fazer do Git a fonte da verdade para tudo que roda nele.
+No [primeiro post](/pt-br/blog/homelab-mini-pc-to-kubernetes/), comecei com um mini PC e cheguei a um
+cluster Kubernetes vazio. Agora era hora de fazer do Git a fonte da verdade para tudo que roda nele.
 
 ## GitOps: Argo CD
 
-Eu precisava decidir qual ferramenta de GitOps gerenciaria o cluster. Existem basicamente duas
-opções populares: Argo CD e Flux CD. Para mim, essa foi uma escolha fácil. Fui de Argo CD porque já
-tinha usado em produção, e pela minha experiência mais empresas usam Argo do que Flux. A interface
-também é um bônus legal.
+Primeiro, eu precisava escolher a ferramenta de GitOps que ia gerenciar o cluster. Basicamente, tem
+duas opções mais usadas: Argo CD e Flux CD. Pra mim foi uma escolha fácil, fui de Argo CD porque já
+tinha usado em produção, e pela minha experiência mais empresas usam Argo do que Flux. E a interface web é um bônus.
 
-Seguindo a prática comum e a documentação oficial do Argo CD, implementei o padrão
-**app-of-apps**: uma aplicação `root` é deployada manualmente primeiro e, a partir dela, todas as
-outras aplicações são gerenciadas, incluindo o próprio Argo CD.
+Seguindo o que é comum no mercado e a própria documentação do Argo CD, implementei o padrão
+**app-of-apps**: primeiro eu faço o deploy de uma aplicação `root` na mão, e a partir daí ela
+gerencia todas as outras, inclusive o próprio Argo CD.
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -33,7 +32,7 @@ spec:
   source:
     repoURL: git@github.com:your-github-user/platform-gitops.git
     targetRevision: main
-    path: apps # uma Application por componente fica aqui
+    path: apps # aqui fica uma Application por componente
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
@@ -43,14 +42,14 @@ spec:
       selfHeal: true # alterado na mão → revertido
 ```
 
-É essa `syncPolicy` que faz o Git sempre ganhar. Se eu removo algo do repositório, o Argo CD remove
-do cluster; se eu altero algo na mão com `kubectl`, o Argo CD desfaz.
+É essa `syncPolicy` que garante que o Git sempre vence. Se eu removo algo do repositório, o Argo CD
+remove do cluster; se eu altero algo na mão com `kubectl`, o Argo CD desfaz.
 
 Mas a ordem importa: um `Certificate` não pode ser criado antes de o cert-manager existir. Cada
 Application tem uma annotation de sync wave, e o Argo CD sincroniza as waves em ordem, da menor
 para a maior:
 
-![App of apps: a Application root observa a pasta apps, e o Argo CD sincroniza a plataforma em waves de -2 a 3](./app-of-apps.svg)
+![App of apps: a Application root observa a pasta apps, e o Argo CD sincroniza a plataforma em waves de -2 a 3](./app-of-apps.pt-br.svg)
 
 ## Secrets
 
@@ -58,15 +57,15 @@ Com tudo isso resolvido, eu precisava de uma forma de lidar com os secrets dentr
 algo seguro e com cara de produção desde o primeiro dia, então escolhi rodar o ESO (External
 Secrets Operator). Como eu já tinha uma assinatura do 1Password, usei ele como backend.
 
-Isso deixa um secret que o ESO não consegue buscar sozinho: o token que ele usa para se autenticar
-no cofre do 1Password, o "secret zero". Esse fica no Git, criptografado em repouso com SOPS, e é
-descriptografado e aplicado uma única vez, no bootstrap do cluster.
+Sobra só um secret que o ESO não tem como buscar sozinho: o token que ele usa para se autenticar no
+cofre do 1Password, o "secret zero". Esse fica no Git, criptografado em repouso com SOPS, e só é
+descriptografado e aplicado uma vez, no bootstrap do cluster.
 
-![Fluxo de secrets: um token criptografado com SOPS no Git permite que o External Secrets Operator leia o 1Password e crie Secrets do Kubernetes para as aplicações](./secrets.svg)
+![Fluxo de secrets: um token criptografado com SOPS no Git permite que o External Secrets Operator leia o 1Password e crie Secrets do Kubernetes para as aplicações](./secrets.pt-br.svg)
 
-Uma aplicação nunca sabe que o 1Password existe. Ela pede um secret com um `ExternalSecret`, e o
-ESO transforma isso em um `Secret` comum do Kubernetes e o atualiza a cada hora. Este é o que o
-cert-manager usa para falar com a Cloudflare:
+As aplicações nem sabem que o 1Password existe. Elas pedem o secret por meio de um
+`ExternalSecret`, e o ESO converte isso num `Secret` comum do Kubernetes, que ele atualiza de hora
+em hora. Este aqui é o que o cert-manager usa para falar com a Cloudflare:
 
 ```yaml
 apiVersion: external-secrets.io/v1
@@ -85,12 +84,12 @@ spec:
         key: cert-manager-cloudflare-api-token/api-token # item/campo no 1Password
 ```
 
-Nenhum secret em texto puro chega ao Git, e rotacionar um secret é alterá-lo no 1Password, sem
-precisar commitar nada.
+Nenhum secret em texto puro vai parar no Git, e para rotacionar um secret basta trocá-lo no
+1Password, sem commitar nada.
 
-## As fundações
+## A base
 
-Eu já tinha juntado algumas peças do quebra-cabeça, mas ainda faltavam algumas fundamentais:
+Algumas peças do quebra-cabeça já estavam no lugar, mas ainda faltavam outras tão importantes quanto:
 
 - **CNI:** rede e gerenciamento de endereços IP (IPAM) dentro do cluster
 - **CSI:** armazenamento persistente para o cluster
@@ -98,29 +97,28 @@ Eu já tinha juntado algumas peças do quebra-cabeça, mas ainda faltavam alguma
 - gerenciamento de DNS
 - TLS
 
-As duas primeiras estão logo abaixo. As outras três são todas sobre como chegar ao cluster, então
-ganharam [um post só delas](/pt-br/blog/homelab-going-live/).
+Sobre os dois primeiros pontos, eu falo aqui embaixo. Os outros três têm a ver com acessar o cluster através da internet, então
+ganharam [um post só para eles](/pt-br/blog/homelab-going-live/).
 
 ### Rede: Cilium
 
-Para a rede e o IPAM do cluster, escolhi o Cilium. Ele é o padrão da indústria e faz muita coisa
-com poucas peças móveis. No meu cluster, ele:
+Para a rede e o IPAM do cluster, escolhi o Cilium. Ele é o padrão de mercado e resolve bastante coisa com poucas dependências. No meu cluster, ele:
 
 - substitui o kube-proxy por completo;
-- distribui IPs de LoadBalancer na minha rede de casa e os anuncia com L2 announcements, então eu
-  não preciso de MetalLB;
-- implementa a Gateway API, então também não preciso de um ingress controller separado;
-- vem com o Hubble, que me mostra qual pod está falando com qual.
+- distribui IPs de LoadBalancer na minha rede e os anuncia com L2 announcements, substituindo o MetalLB;
+- implementa a Gateway API, removendo a necessidade de um ingress controller separado;
+- vem com o Hubble, que me mostra qual pod está chamando qual.
 
-Existe um problema de ovo e galinha: sem um CNI, o node nunca fica `Ready`, então o Argo CD não
-consegue rodar para instalar um. O OpenTofu instala o Cilium quando cria o cluster, e o Argo CD
-assume a partir daí, usando o mesmo arquivo de values para que os dois nunca discordem.
+O problema de instalar o Cilium 100% via GitOps é que sem um CNI, o node nunca fica `Ready`, então o Argo CD não consegue rodar para realizar a instalação. Desta forma, o OpenTofu instala o Cilium
+quando cria o cluster, e daí em diante o Argo CD assume, usando o mesmo arquivo de values, assim os
+dois nunca divergem.
 
 ### Armazenamento: Proxmox CSI
 
-O Proxmox CSI foi minha escolha de armazenamento. Ele conecta volumes do Proxmox ao cluster e os
-mapeia para PersistentVolumes, o que o deixa muito parecido com uma solução gerenciada de nuvem,
-como o EBS, e muito fácil de gerenciar em casa. Cada `PersistentVolumeClaim` vira um disco no NVMe:
+Para armazenamento, fui de Proxmox CSI. Ele anexa volumes do Proxmox ao cluster e os expõe como
+PersistentVolumes. Na prática, funciona de um jeito bem parecido com uma solução gerenciada de
+cloud, como o EBS, e é bem fácil de manter. Cada `PersistentVolumeClaim` vira um disco no
+NVMe:
 
 ```yaml
 apiVersion: storage.k8s.io/v1
@@ -134,13 +132,13 @@ parameters:
   storage: local-lvm
   csi.storage.k8s.io/fstype: ext4
   ssd: 'true'
-reclaimPolicy: Delete # aplicações que precisam manter os dados optam por Retain
+reclaimPolicy: Delete # aplicações que precisam manter os dados usam Retain
 volumeBindingMode: WaitForFirstConsumer
 allowVolumeExpansion: true
 ```
 
-## A seguir
+## No próximo post
 
-Nesse ponto o cluster já rodava qualquer coisa que o Git mandasse, mas só eu conseguia acessá-lo.
-No último post eu abro ele para a internet, dou a ele DNS e TLS e faço o deploy da minha primeira
+Até este ponto, o cluster já rodava qualquer coisa que o Git mandasse, mas apenas eu conseguia acessá-lo. No
+último post eu abro o cluster para a internet, configuro DNS e TLS e faço o deploy da minha primeira
 aplicação.
