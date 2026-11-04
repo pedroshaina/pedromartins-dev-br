@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Private specs and plans (separate private repo: internal-docs)
+.internal/
