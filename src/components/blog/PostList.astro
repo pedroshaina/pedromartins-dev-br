@@ -1,17 +1,20 @@
 ---
 import { formatDate, type Locale } from '@/i18n/locales';
 import { t } from '@/i18n/ui';
-import { postHref, type Post } from '@/lib/content';
+import { getProjects, postHref, type Post } from '@/lib/content';
 
 interface Props {
   posts: Post[];
   locale: Locale;
   order: 'newest' | 'oldest';
   numbered?: boolean;
+  /** A badge with the post's project under the date, for lists that mix projects. */
+  showProject?: boolean;
 }
 
-const { posts, locale, order, numbered = false } = Astro.props;
+const { posts, locale, order, numbered = false, showProject = false } = Astro.props;
 const s = t(locale);
+const projectTitles = new Map((await getProjects(locale)).map((p) => [p.slug, p.title]));
 const sorted = [...posts].sort((a, b) => {
   const d = a.entry.data.pubDate.getTime() - b.entry.data.pubDate.getTime();
   return order === 'oldest' ? d : -d;
@@ -25,9 +28,14 @@ const sorted = [...posts].sort((a, b) => {
         {numbered && <span class="part">{s.post.part(i + 1)}</span>}
         <a href={postHref(post)}>{post.entry.data.title}</a>
       </div>
-      <time datetime={post.entry.data.pubDate.toISOString()}>
-        {formatDate(post.entry.data.pubDate, locale)}
-      </time>
+      <div class="when">
+        <time datetime={post.entry.data.pubDate.toISOString()}>
+          {formatDate(post.entry.data.pubDate, locale)}
+        </time>
+        {showProject && post.entry.data.project && (
+          <span class="badge">{projectTitles.get(post.entry.data.project)}</span>
+        )}
+      </div>
       <p>{post.entry.data.description}</p>
     </li>
   ))}
@@ -69,12 +77,33 @@ const sorted = [...posts].sort((a, b) => {
     text-decoration: none;
   }
 
+  /* Spans the title and description rows, so the badge never pushes the description down. */
+  .when {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    padding-top: 6px;
+  }
+
   time {
     font-family: var(--font-mono);
     font-size: 13px;
     color: var(--color-dim);
     white-space: nowrap;
-    padding-top: 6px;
+  }
+
+  .badge {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1;
+    color: var(--color-magenta);
+    white-space: nowrap;
+    padding: 4px 8px;
+    border: 1px solid var(--color-magenta-glow);
+    border-radius: 4px;
   }
 
   p {
@@ -85,7 +114,7 @@ const sorted = [...posts].sort((a, b) => {
   }
 
   /* With a Part label above the title, the date lines up with the title instead. */
-  .head:has(.part) + time {
+  .head:has(.part) + .when {
     padding-top: 30px;
   }
 
@@ -94,12 +123,18 @@ const sorted = [...posts].sort((a, b) => {
       grid-template-columns: minmax(0, 1fr);
     }
 
-    time {
+    /* Date and badge on one line above the title. */
+    .when {
+      grid-column: 1;
       grid-row: 1;
+      flex-direction: row;
+      align-items: center;
+      gap: 12px;
       padding-top: 0;
+      margin-bottom: 6px;
     }
 
-    .head:has(.part) + time {
+    .head:has(.part) + .when {
       padding-top: 0;
     }
   }
