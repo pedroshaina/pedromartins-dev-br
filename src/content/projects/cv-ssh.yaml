@@ -1,0 +1,13 @@
+order: 3
+repo: https://github.com/pedroshaina/cv-ssh
+en:
+  title: cv-ssh
+  summary: >-
+    My CV as a terminal app served over SSH. Connect with any SSH client and browse it as a TUI:
+    no account, no key, no password. The SSH server is the app, with no shell behind it.
+pt-br:
+  title: cv-ssh
+  summary: >-
+    Meu currículo como um app de terminal servido por SSH. É só conectar com qualquer cliente SSH
+    e navegar como uma TUI: sem conta, sem chave, sem senha. O próprio servidor SSH é o app, sem
+    nenhum shell por trás.
