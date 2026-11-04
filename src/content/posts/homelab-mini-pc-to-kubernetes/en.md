@@ -34,9 +34,7 @@ My goal for this hardware was simple: I wanted a Kubernetes cluster to run my pr
 managed by code via GitOps, with some spare room to experiment with other technologies such as
 Hermes Agent.
 
-So I got to work. This is where it ended up, layer by layer:
-
-![The homelab's layers: OpenTofu declares a Talos VM and a DNS container on Proxmox VE, which runs on the mini PC](./layers.svg)
+So I got to work.
 
 ## The hypervisor: Proxmox VE
 
@@ -54,37 +52,6 @@ knew I wanted to use code, so I could rebuild or replicate the setup from scratc
 every change. After some research I went with OpenTofu as the IaC tool. It's an open-source fork
 of HashiCorp's Terraform, and it adds some cool features like native state encryption. My state
 lives encrypted in a Cloudflare R2 bucket.
-
-This is the Kubernetes VM, trimmed down to the interesting parts:
-
-```hcl
-resource "proxmox_virtual_environment_vm" "cp" {
-  for_each = var.nodes
-
-  name      = each.key
-  node_name = var.proxmox_node
-  on_boot   = true
-
-  cpu {
-    cores = var.node_cpu # 8
-    type  = "host"
-  }
-
-  memory {
-    dedicated = var.node_memory_mb # 20480
-    floating  = 0 # no ballooning: Kubernetes expects fixed memory
-  }
-
-  disk {
-    datastore_id = "local-lvm"
-    import_from  = proxmox_virtual_environment_download_file.talos.id
-    size         = var.node_disk_gb # 100
-  }
-}
-```
-
-The disk is imported from a Talos image that OpenTofu downloads itself, and the same code then
-applies the Talos configuration to the node. The VM and the OS on it are defined in one place.
 
 ## The cluster: Talos Linux
 
@@ -115,9 +82,46 @@ cluster: 8 vCPUs and 20 GB of RAM. At first I started setting up a 3-node HA clu
 resources soon became scarce, and I was afraid the extra etcd writes would shorten the SSD's
 lifespan. So I quickly switched to the single-node architecture that runs today.
 
+In OpenTofu, that node is a single VM, trimmed down here to the interesting parts:
+
+```hcl
+resource "proxmox_virtual_environment_vm" "cp" {
+  for_each = var.nodes
+
+  name      = each.key
+  node_name = var.proxmox_node
+  on_boot   = true
+
+  cpu {
+    cores = var.node_cpu # 8
+    type  = "host"
+  }
+
+  memory {
+    dedicated = var.node_memory_mb # 20480
+    floating  = 0 # no ballooning: Kubernetes expects fixed memory
+  }
+
+  disk {
+    datastore_id = "local-lvm"
+    import_from  = proxmox_virtual_environment_download_file.talos.id
+    size         = var.node_disk_gb # 100
+  }
+}
+```
+
+The disk is imported from a Talos image that OpenTofu downloads itself, and the same code then
+applies the Talos configuration to the node. The VM and the OS on it are defined in one place.
+
 That leaves 4 GB of RAM for Proxmox itself and a small container for internal DNS (more on that in
 part 3). If the node goes down, everything goes down with it. For a homelab, that's a trade-off
 I'm happy to make, especially since the whole thing is code I can rebuild.
+
+## Putting it together
+
+This is where all those decisions landed, layer by layer:
+
+![The homelab's layers: OpenTofu declares a Talos VM and a DNS container on Proxmox VE, which runs on the mini PC](./layers.svg)
 
 ## Up next
 
