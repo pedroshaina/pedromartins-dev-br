@@ -5,7 +5,7 @@ description: >-
   and the cluster's foundations: Cilium for networking and Proxmox CSI for storage.
 pubDate: 2026-11-02
 project: k8s-homelab
-draft: true
+draft: false
 ---
 
 In the [first post](/blog/homelab-mini-pc-to-kubernetes/), I went from a mini PC to an empty

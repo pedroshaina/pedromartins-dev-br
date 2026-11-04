@@ -5,7 +5,7 @@ description: >-
   Talos Linux: Proxmox VE, OpenTofu e um único node.
 pubDate: 2026-11-01
 project: k8s-homelab
-draft: true
+draft: false
 ---
 
 Passei a maior parte da carreira desenvolvendo software e trabalhando com ferramentas de

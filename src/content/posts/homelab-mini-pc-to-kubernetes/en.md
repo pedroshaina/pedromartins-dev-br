@@ -5,7 +5,7 @@ description: >-
   Talos Linux cluster: Proxmox VE, OpenTofu and a single node.
 pubDate: 2026-11-01
 project: k8s-homelab
-draft: true
+draft: false
 ---
 
 For most of my career, I've been developing software and working with Ops/Platform tools
