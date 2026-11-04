@@ -24,7 +24,7 @@ export type UiStrings = {
     projectDescription: (project: string) => string;
   };
   post: {
-    partOf: (n: number, m: number, project: string) => string;
+    partOf: (n: number, m: number) => string;
     part: (n: number) => string;
     minRead: string;
     previous: string;
@@ -65,7 +65,7 @@ export const ui: Record<Locale, UiStrings> = {
       projectDescription: (project) => `Posts about ${project}, oldest first.`,
     },
     post: {
-      partOf: (n, m, project) => `Part ${n} of ${m} on ${project}`,
+      partOf: (n, m) => `Part ${n} of ${m} on`,
       part: (n) => `Part ${n}`,
       minRead: 'min',
       previous: 'Previous',
@@ -102,7 +102,7 @@ export const ui: Record<Locale, UiStrings> = {
       projectDescription: (project) => `Posts sobre ${project}, do mais antigo ao mais recente.`,
     },
     post: {
-      partOf: (n, m, project) => `Parte ${n} de ${m} sobre ${project}`,
+      partOf: (n, m) => `Parte ${n} de ${m} sobre`,
       part: (n) => `Parte ${n}`,
       minRead: 'min',
       previous: 'Anterior',
