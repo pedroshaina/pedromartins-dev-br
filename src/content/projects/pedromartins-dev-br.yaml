@@ -8,5 +8,4 @@ en:
 pt-br:
   title: pedromartins.dev.br
   summary: >-
-    Este website: um portfólio e blog em inglês e português, feito com Astro como páginas
-    estáticas simples e servido por nginx a partir do meu homelab k8s.
+    Este website: um portfólio e blog em inglês e português, feito com Astro e servido via nginx a partir do meu homelab.

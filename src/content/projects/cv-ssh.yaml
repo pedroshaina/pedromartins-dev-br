@@ -8,6 +8,6 @@ en:
 pt-br:
   title: cv-ssh
   summary: >-
-    Meu currículo como um app de terminal servido por SSH. É só conectar com qualquer cliente SSH
-    e navegar como uma TUI: sem conta, sem chave, sem senha. O próprio servidor SSH é o app, sem
+    Meu currículo em um app de terminal servido via SSH. É só conectar com qualquer cliente SSH
+    e navegar pela TUI: sem criar conta, sem autenticação necessária. O próprio servidor SSH é o app, sem
     nenhum shell por trás.
