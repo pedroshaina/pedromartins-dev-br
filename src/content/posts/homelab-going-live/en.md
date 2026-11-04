@@ -5,7 +5,7 @@ description: >-
   cert-manager, deploying yabe through GitOps, and the observability stack that watches it.
 pubDate: 2026-11-03
 project: k8s-homelab
-draft: true
+draft: false
 ---
 
 In the [previous post](/blog/homelab-gitops-foundations/), Git took over the cluster. Three

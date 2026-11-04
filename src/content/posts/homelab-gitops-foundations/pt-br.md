@@ -5,7 +5,7 @@ description: >-
   cluster: Cilium para rede e Proxmox CSI para armazenamento.
 pubDate: 2026-11-02
 project: k8s-homelab
-draft: true
+draft: false
 ---
 
 No [primeiro post](/pt-br/blog/homelab-mini-pc-to-kubernetes/), comecei com um mini PC e cheguei a um
