@@ -58,7 +58,7 @@ const s = t(locale);
     }
 
     .blog {
-      margin-left: 16px;
+      margin-right: 16px;
     }
   }
 
@@ -99,11 +99,20 @@ const s = t(locale);
     line-height: 1.65;
   }
 
+  /* Right-aligned under the list; margin-right is left to the phone rule above. */
   .blog {
-    display: inline-block;
+    display: block;
+    width: fit-content;
     margin-top: 32px;
+    margin-left: auto;
     font-size: 15px;
     color: var(--color-cyan);
     text-decoration: none;
+    text-underline-offset: 4px;
+  }
+
+  .blog:hover,
+  .blog:focus-visible {
+    text-decoration: underline;
   }
 </style>
