@@ -28,11 +28,6 @@ const [posts, projects] = await Promise.all([getPosts(locale), getProjects(local
 
 const series = getSeries(post, posts);
 const project = projects.find((p) => p.slug === data.project);
-// A one-post series links back to the project on the home page instead of to itself.
-const seriesHref =
-  project && series && series.total > 1
-    ? projectBlogHref(project, posts, locale)
-    : `${localizedPath('/', locale)}#projects`;
 
 // Within the series when there is one; otherwise chronological (posts are newest first).
 let prev: Post | undefined;
@@ -65,7 +60,8 @@ if (series) {
     <h1>{data.title}</h1>
     {series && project && (
       <p class="from">
-        {s.post.partOf(series.index, series.total)} <a href={seriesHref}>{project.title}</a>
+        {s.post.partOf(series.index, series.total)}{' '}
+        <a href={projectBlogHref(project.slug, locale)}>{project.title}</a>
       </p>
     )}
     <div class="prose">
