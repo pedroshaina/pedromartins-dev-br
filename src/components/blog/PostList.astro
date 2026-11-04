@@ -1,5 +1,5 @@
 ---
-import { formatDate, type Locale } from '@/i18n/locales';
+import { formatDate, localizedPath, type Locale } from '@/i18n/locales';
 import { t } from '@/i18n/ui';
 import { getProjects, postHref, type Post } from '@/lib/content';
 
@@ -33,7 +33,12 @@ const sorted = [...posts].sort((a, b) => {
           {formatDate(post.entry.data.pubDate, locale)}
         </time>
         {showProject && post.entry.data.project && (
-          <span class="badge">{projectTitles.get(post.entry.data.project)}</span>
+          <a
+            class="badge"
+            href={localizedPath(`/blog/project/${post.entry.data.project}/`, locale)}
+          >
+            {projectTitles.get(post.entry.data.project)}
+          </a>
         )}
       </div>
       <p>{post.entry.data.description}</p>
@@ -68,7 +73,7 @@ const sorted = [...posts].sort((a, b) => {
     margin-bottom: 4px;
   }
 
-  a {
+  .head a {
     font-family: var(--font-heading);
     font-weight: 500;
     font-size: 22px;
@@ -102,8 +107,15 @@ const sorted = [...posts].sort((a, b) => {
     color: var(--color-magenta);
     white-space: nowrap;
     padding: 4px 8px;
+    text-decoration: none;
     border: 1px solid var(--color-magenta-glow);
     border-radius: 4px;
+  }
+
+  /* The text turns cyan on hover like every link (global.css); the outline follows. */
+  .badge:hover,
+  .badge:focus-visible {
+    border-color: var(--color-cyan-glow);
   }
 
   p {

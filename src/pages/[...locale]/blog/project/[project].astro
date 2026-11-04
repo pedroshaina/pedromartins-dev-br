@@ -4,7 +4,7 @@ import BlogIndexPage from '@/components/blog/BlogIndexPage.astro';
 import { localePaths, type Locale } from '@/i18n/locales';
 import { getPosts, getProjects, type Project } from '@/lib/content';
 
-// Only projects with 2+ posts get a list; with one, the home page links straight to the post.
+// Every project with a post gets a list; the badges on the blog page link to it.
 export const getStaticPaths = (async () => {
   const paths = await Promise.all(
     localePaths().map(async ({ params, props }) => {
@@ -13,7 +13,7 @@ export const getStaticPaths = (async () => {
         getProjects(props.locale),
       ]);
       return projects
-        .filter((project) => posts.filter((p) => p.entry.data.project === project.slug).length >= 2)
+        .filter((project) => posts.some((p) => p.entry.data.project === project.slug))
         .map((project) => ({
           params: { ...params, project: project.slug },
           props: { ...props, project },
