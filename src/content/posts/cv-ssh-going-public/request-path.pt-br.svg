@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 560" role="img" aria-labelledby="t">
+  <title id="t">A conexão SSH de um visitante chega no HAProxy de uma VM no GCP, que aplica limites por IP e controla com o CAKE tudo o que a VM envia, e depois atravessa o Tailscale até o servidor cv-ssh no meu homelab, que limita as sessões, recusa tudo que não seja o currículo e renderiza o currículo com o Ink</title>
+  <style>
+    text { font-family: 'IBM Plex Sans', system-ui, sans-serif; fill: #9aa1ba; font-size: 15px; }
+    .h { fill: #ffffff; font-weight: 600; font-size: 17px; }
+    .m { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; }
+    .c { fill: #05d9e8; }
+    .g { fill: #ff2a6d; }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10z" fill="#05d9e8"/>
+    </marker>
+  </defs>
+  <rect width="720" height="560" rx="8" fill="#0a1128"/>
+
+  <!-- Visitor -->
+  <rect x="40" y="20" width="640" height="64" rx="6" fill="none" stroke="#70789a" stroke-width="1.5"/>
+  <text x="60" y="46" class="h">Visitante</text>
+  <text x="60" y="70" class="m">ssh cv.pedromartins.dev.br</text>
+
+  <path d="M120 88v60" stroke="#05d9e8" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+  <text x="132" y="123">TCP 22, para o IP público da VM</text>
+
+  <!-- Edge VM -->
+  <rect x="40" y="152" width="640" height="124" rx="6" fill="none" stroke="#ff2a6d" stroke-width="1.5"/>
+  <text x="60" y="178" class="h g">VM e2-micro no GCP</text>
+  <text x="60" y="204">HAProxy na :22 · 25 conexões · por IP: 3 abertas, 10 novas a cada 10 s</text>
+  <text x="60" y="228">adiciona um header PROXY com o IP real do visitante</text>
+  <text x="60" y="252">CAKE: tudo o que a VM envia ≤ 128 kbit/s</text>
+
+  <path d="M120 280v60" stroke="#05d9e8" stroke-width="1.5" stroke-dasharray="5 4" fill="none" marker-end="url(#a)"/>
+  <text x="132" y="315">Tailscale: as duas pontas conectam de saída, sem portas abertas em casa</text>
+
+  <!-- Homelab -->
+  <rect x="40" y="344" width="640" height="196" rx="6" fill="none" stroke="#05d9e8" stroke-width="1.5"/>
+  <text x="60" y="370" class="h c">Meu homelab</text>
+  <rect x="60" y="386" width="600" height="136" rx="6" fill="none" stroke="#ff2a6d" stroke-width="1.5"/>
+  <text x="80" y="412" class="h g">cv-ssh</text>
+  <text x="80" y="438">ssh2: 20 sessões no total, 2 por IP</text>
+  <text x="80" y="462">30 s para chegar ao currículo, 180 s ocioso</text>
+  <text x="80" y="486">sem shell: comandos, forwarding e SFTP recusados</text>
+  <text x="80" y="510">o Ink renderiza o currículo no canal</text>
+</svg>
