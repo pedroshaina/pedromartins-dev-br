@@ -35,7 +35,7 @@
   <!-- Fake terminal -->
   <rect x="100" y="248" width="520" height="96" rx="6" fill="none" stroke="#ff2a6d" stroke-width="1.5"/>
   <text x="120" y="274" class="h g">Terminal de mentira</text>
-  <text x="120" y="300" class="m">TerminalInput: isTTY, raw mode não faz nada</text>
+  <text x="120" y="300" class="m">TerminalInput: isTTY, setRawMode não faz nada</text>
   <text x="120" y="324" class="m">TerminalOutput: columns, rows, \n → \r\n</text>
 
   <path d="M200 348v42" stroke="#05d9e8" stroke-width="1.5" fill="none" marker-end="url(#a)"/>

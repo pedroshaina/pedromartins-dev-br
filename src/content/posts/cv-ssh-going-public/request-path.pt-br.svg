@@ -30,7 +30,8 @@
   <text x="60" y="252">CAKE: tudo o que a VM envia ≤ 128 kbit/s</text>
 
   <path d="M120 280v60" stroke="#05d9e8" stroke-width="1.5" stroke-dasharray="5 4" fill="none" marker-end="url(#a)"/>
-  <text x="132" y="315">Tailscale: as duas pontas conectam de saída, sem portas abertas em casa</text>
+  <text x="132" y="305">Tailscale: as duas pontas só abrem conexões de saída,</text>
+  <text x="132" y="327">nenhuma porta aberta em casa</text>
 
   <!-- Homelab -->
   <rect x="40" y="344" width="640" height="196" rx="6" fill="none" stroke="#05d9e8" stroke-width="1.5"/>
@@ -38,7 +39,7 @@
   <rect x="60" y="386" width="600" height="136" rx="6" fill="none" stroke="#ff2a6d" stroke-width="1.5"/>
   <text x="80" y="412" class="h g">cv-ssh</text>
   <text x="80" y="438">ssh2: 20 sessões no total, 2 por IP</text>
-  <text x="80" y="462">30 s para chegar ao currículo, 180 s ocioso</text>
+  <text x="80" y="462">30 s para chegar ao currículo, 180 s de inatividade</text>
   <text x="80" y="486">sem shell: comandos, forwarding e SFTP recusados</text>
   <text x="80" y="510">o Ink renderiza o currículo no canal</text>
 </svg>
