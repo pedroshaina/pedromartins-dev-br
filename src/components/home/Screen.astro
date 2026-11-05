@@ -15,10 +15,14 @@ const { id, title, width } = Astro.props;
     <Heading>{title}</Heading>
     <slot />
   </div>
+  <div class="end" aria-hidden="true"></div>
 </section>
 
 <style>
+  /* A screen taller than the window scrolls freely between its top and bottom snap points.
+     Both stop a fling, so leaving a screen always takes a separate swipe. */
   .screen {
+    position: relative;
     min-height: 100svh;
     display: flex;
     align-items: center;
@@ -27,10 +31,23 @@ const { id, title, width } = Astro.props;
     scroll-snap-stop: always;
   }
 
-  /* The last screen shares the window with the footer, which is where it snaps. */
+  .end {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    scroll-snap-align: end;
+    scroll-snap-stop: always;
+  }
+
+  /* The last screen shares the window with the footer, which is its bottom snap point. */
   .screen:last-child {
     min-height: calc(100svh - var(--footer-height));
-    scroll-snap-align: none;
+  }
+
+  .screen:last-child .end {
+    display: none;
   }
 
   .col {
