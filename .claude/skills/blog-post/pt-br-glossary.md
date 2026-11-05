@@ -30,3 +30,22 @@ fine, but write "para" in general. No textbook formality ("de bom grado", "Concl
 | "Up next" | "No próximo post" | |
 | "Wrapping up" | "Para fechar" | |
 | "Putting it together" | "Juntando tudo" | |
+| VPS (virtual private server) | VPS | feminine: "uma VPS"; not "servidor virtual privado" |
+| stream (of bytes) | stream | not "fluxo" |
+| LLM | o LLM | masculine (the model) |
+| boring (= easy, no surprises) | simples / sem graça | never "chata" (means annoying) |
+| fake (verb, in code) | simular | "a aplicação simula os dois"; "terminal de mentira" for the noun |
+| tab (UI) | aba | |
+| budget | orçamento | |
+| surprise bill | susto na fatura | not "conta surpresa" |
+| dial out | abrir conexões de saída | |
+| carry (traffic) | passar por | "dá para passar SSH por ele", not "carregar" |
+| idle (timeout) | inatividade | "180 s de inatividade" |
+| resource hijacking | gente sequestrando os recursos da máquina | |
+| journey (closing) | história | "jornada" sounds corporate |
+| GenAI | IA generativa | |
+| "I was mind-blown" | "Fiquei de cara!" | |
+| "working flawlessly" | "funcionando liso" | |
+| TUI, PTY, shell, stdin/stdout, raw mode, frame, banner, hook, header | unchanged | |
+| port forwarding, forwarding, rate limiting, timeout, botnet | unchanged | |
+| egress, free tier, relay, traffic shaper, edge (a VM at the edge) | unchanged | "o edge" |
