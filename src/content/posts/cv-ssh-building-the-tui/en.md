@@ -41,15 +41,15 @@ the SSH client a PTY capable of rendering a TUI.
 I found some libs in the Node ecosystem that could help me with that:
 
 - [`ssh2`](https://github.com/mscdotnet/ssh2) lets a Node.js app expose an SSH server
-- [Ink](https://github.com/vadimdemedes/ink) lets React components be rendered in the terminal
+- [`Ink`](https://github.com/vadimdemedes/ink) lets React components be rendered in the terminal
 
 ## My CV as a terminal app served over SSH
 
 I had this idea: what if I could serve my CV over SSH the same way? It would be a nice piece of
-portfolio and would help me better understand how all this works, but it would also be a nice way
+portfolio, it would help me better understand how all this works and ultimately it was a nice way
 to make my CV stand out among thousands, possibly millions, of other developers' CVs.
 
-I had all the pieces to put this together and go live with this idea… Or so I thought.
+I had all the pieces put together to go live with this idea… Or so I thought.
 
 I quickly created a new repo, scaffolded a simple Node.js app and had Claude Code set up the basics
 for ssh2 and Ink. Then I had to decide how to actually provide the CV data itself. I decided to
@@ -96,7 +96,7 @@ useInput((input, key) => {
 });
 ```
 
-<!-- TODO(author): TUI screenshot here -->
+![The CV in a terminal after ssh cv.pedromartins.dev.br: my name as a big pixel-font banner, tabs for About, Experience, Projects and Contact, the About section open, and the key hints at the bottom](./tui.png)
 
 ## There is no PTY
 
@@ -152,7 +152,7 @@ interprets it and tells the UI how to re-render, and the new frame goes back dow
 
 ![A keystroke goes from the visitor's SSH client through the ssh2 channel and the fake terminal into Ink, and the redrawn frame goes back the same way](./channel-to-ink.svg)
 
-Thank god we have GenAI nowadays :D
+I honestly couldn't imagine implementing all that myself for a learning experiment like this one. Thank god we have GenAI nowadays :D
 
 ## Up next
 

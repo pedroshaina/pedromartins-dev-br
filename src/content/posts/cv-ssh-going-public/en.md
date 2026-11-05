@@ -28,7 +28,7 @@ could go wrong by opening this up publicly:
   etc.
 
 I knew I didn't want to hand out my public IP so freely, so I began looking for alternatives.
-Basically, the only realistic alternative that would keep costs under $5/month (I didn't want to
+Basically, the only realistic alternative that would keep costs under $10/month (I didn't want to
 spend more than that on a pet project) was renting a virtual private server and using it as a relay
 between my home network and the internet. And that's what I did.
 
@@ -93,8 +93,7 @@ traffic, that needed to be protected as well.
 
 For the GCP edge, I decided to keep it simple. The VM was already running HAProxy to forward the
 clients' real IP addresses to the SSH server (in a PROXY protocol header) for the per-IP cap, so
-naturally I used it to enforce per-IP limits on the public edge as well. This excerpt comes from my
-homelab's private infrastructure repo, with the backend's name made generic:
+naturally I used it to enforce per-IP limits on the public edge as well:
 
 ```
 frontend ssh
@@ -124,8 +123,8 @@ setup it does two things:
 - If someone decides to hammer the server with requests, the edge slows down for everyone instead of
   sending more. CAKE queues per flow, so a normal session stays usable next to a heavy one.
 - It caps what a botnet could add to my GCP bill. Running flat out for a whole month, 128 kbit/s is
-  about 42 GB, or roughly US$4.90 of egress. With the IP, the worst case is about US$8.55/month, so I
-  raised my budget for this project to US$10/month.
+  about 42 GB, or roughly US$4.90 of egress. With the IP, the worst case is about US$8.55/month, still
+  under my US$10/month budget.
 
 ## A terminal in the browser
 
