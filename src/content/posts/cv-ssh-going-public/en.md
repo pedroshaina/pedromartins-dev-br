@@ -5,7 +5,7 @@ description: >-
   free-tier VM as a relay, Tailscale, what the server refuses, HAProxy limits and a CAKE egress cap.
 pubDate: 2026-11-05
 project: cv-ssh
-draft: true
+draft: false
 ---
 
 In the [previous post](/blog/cv-ssh-building-the-tui/), my CV became a TUI served over SSH, running

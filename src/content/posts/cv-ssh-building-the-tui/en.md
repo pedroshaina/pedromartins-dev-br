@@ -5,7 +5,7 @@ description: >-
   idea in TypeScript with ssh2 and Ink, and why an SSH server has no terminal to draw on.
 pubDate: 2026-11-04
 project: cv-ssh
-draft: true
+draft: false
 ---
 
 One day I was watching a Primeagen video when he announced his product, terminal.shop, an online

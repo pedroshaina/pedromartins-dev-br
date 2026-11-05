@@ -6,7 +6,7 @@ description: >-
   um teto de egress com CAKE.
 pubDate: 2026-11-05
 project: cv-ssh
-draft: true
+draft: false
 ---
 
 No [post anterior](/pt-br/blog/cv-ssh-building-the-tui/), meu currículo virou uma TUI servida via

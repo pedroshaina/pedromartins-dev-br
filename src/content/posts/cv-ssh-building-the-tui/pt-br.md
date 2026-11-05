@@ -5,7 +5,7 @@ description: >-
   recriei a ideia em TypeScript com ssh2 e Ink, e por que um servidor SSH não tem terminal nenhum.
 pubDate: 2026-11-04
 project: cv-ssh
-draft: true
+draft: false
 ---
 
 Um dia eu estava assistindo um vídeo do Primeagen quando ele anunciou o produto dele, o
